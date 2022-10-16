@@ -10,14 +10,32 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    var firstTapBarController:UINavigationController!
+    var secondTapBarController:UINavigationController!
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let tapBarController = UITabBarController()
+        firstTapBarController = UINavigationController.init(rootViewController: FeedViewController())
+        secondTapBarController = UINavigationController.init(rootViewController: ProfileViewController())
+        tapBarController.viewControllers = [firstTapBarController,secondTapBarController]
+        let item1 = UITabBarItem(title: "Лента", image: UIImage(systemName: "doc"), tag: 0)
+        let item2 = UITabBarItem(title: "Профиль", image: UIImage(systemName: "paperplane"), tag: 1)
+        firstTapBarController.tabBarItem = item1
+        secondTapBarController.tabBarItem = item2
+        //UITabBar.appearance().tintColor = UIColor(ciColor: .red)
+        UITabBar.appearance().backgroundColor = .lightText
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = tapBarController
+        window.makeKeyAndVisible()
+        self.window = window
     }
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
