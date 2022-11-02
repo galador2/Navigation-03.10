@@ -8,10 +8,7 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-    convenience init() {
-           self.init(nibName:nil, bundle:nil)
-        self.modalPresentationStyle = .fullScreen
-       }
+    
     private let button2:UIButton = {
         let button2 = UIButton()
         button2.setTitle("Кнопка2", for: .normal)
@@ -42,11 +39,12 @@ class InfoViewController: UIViewController {
         
         
 
-        // Do any additional setup after loading the view.
+        
     }
     func setupAlertAction(){
         allertController.addAction(UIAlertAction(title: "Продолжить", style: .cancel, handler: nil))
-        allertController.addAction(UIAlertAction(title: "Выйти", style: .default, handler: {_ in print ("Alert")}))
+        allertController.addAction(UIAlertAction(title: "Выйти", style: .default, handler: {_ in print ("Alert") }))
+
         
     }
     func addTargets() {
@@ -63,15 +61,5 @@ class InfoViewController: UIViewController {
     @objc func addTarget(){
         self.present(allertController, animated: true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

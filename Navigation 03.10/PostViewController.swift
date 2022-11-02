@@ -9,7 +9,7 @@ import UIKit
 
 class PostViewController: UIViewController {
     var titleName = "Стартовая страница"
-    
+    //var post = Post(title: "Пост")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,22 +18,11 @@ class PostViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
         
 
-        // Do any additional setup after loading the view.
+        
     }
     @objc func infoViewController(){
-        self.navigationController?.pushViewController(InfoViewController(), animated: true)
+        self.navigationController?.present(InfoViewController(), animated: true)
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
