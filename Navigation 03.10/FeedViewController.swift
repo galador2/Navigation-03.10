@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     var post = Post(title: "Пост")
-    //var titleName = "Стартовая страница"
+    
     
     private lazy var button:UIButton = {
         let button = UIButton()

@@ -61,5 +61,6 @@ class InfoViewController: UIViewController {
     @objc func addTarget(){
         self.present(allertController, animated: true, completion: nil)
     }
+    
 
 }
