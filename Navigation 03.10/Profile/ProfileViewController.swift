@@ -10,24 +10,28 @@ import UIKit
 class ProfileViewController: UIViewController {
     private let viewNew:ProfileHeaderView = {
         let viewNew = ProfileHeaderView()
+        viewNew.translatesAutoresizingMaskIntoConstraints = false
         return viewNew
     }()
     
+    private func setupConstraint(){
+        NSLayoutConstraint.activate([
+            viewNew.leftAnchor.constraint(equalTo: view.leftAnchor),
+            viewNew.rightAnchor.constraint(equalTo: view.rightAnchor),
+            viewNew.topAnchor.constraint(equalTo: view.topAnchor),
+            viewNew.widthAnchor.constraint(equalTo: view.widthAnchor)
     
-    override func viewWillLayoutSubviews(){
-        view.addSubview(viewNew)
-        super.viewWillLayoutSubviews()
-        viewNew.frame=self.view.frame
+        ])
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        
+        view.addSubview(viewNew)
+        setupConstraint()
      
     
     }
    
 }
-

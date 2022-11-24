@@ -8,8 +8,8 @@
 import UIKit
 
 class ProfileHeaderView:UIView {
-
-    private let button:UIButton = {
+    
+    let setStatusButton:UIButton = {
         let button1 = UIButton()
         button1.setTitle("Set status", for: .normal)
         button1.setTitleColor(UIColor.white, for: .normal)
@@ -21,73 +21,128 @@ class ProfileHeaderView:UIView {
         button1.layer.shadowColor = UIColor.black.cgColor
         button1.addTarget(self, action: #selector(buttonAction), for:.touchUpInside)
         button1.translatesAutoresizingMaskIntoConstraints = false
-        button1.frame = CGRect(x: 16, y: 284, width: 360, height: 50)
         return button1
         
     }()
-   
-    private let labelFirst:UILabel = {
-         let label = UILabel()
-         label.text = "Kostenko Kirill"
-         label.font = UIFont.boldSystemFont(ofSize: 18)
-         label.textColor = .black
-         label.translatesAutoresizingMaskIntoConstraints = false
-         label.frame = CGRect(x: 180, y: 120, width: 200, height: 40)
-         return label
-     }()
     
-    private let labelSecond:UILabel = {
+    let buttonSecond:UIButton = {
+       let button = UIButton()
+        button.setTitle("New button", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 7
+        return button
+      
+    }()
+    
+    private let fullNameLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Kostenko Kirill"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let statusLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = .gray
-        label.frame = CGRect(x: 180, y: 180 , width: 200, height: 40)
+        label.text = "Мой статус"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
+        
     }()
-    private let labelStatus: UITextField = {
+    
+    private let statusTextField: UITextField = {
         let label = UITextField()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = .black
-        label.frame = CGRect(x: 180, y: 235, width: 195, height: 40)
         label.layer.cornerRadius = 12
         label.layer.borderWidth = 1
         label.backgroundColor = .white
         label.layer.masksToBounds = true
+        label.placeholder = "Введите ваш статус"
+        label.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: label.frame.height))
+        label.leftViewMode = .always
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+        
+    }()
+    
+    private lazy var avatarImageView: UIImageView = {
+        var myView = UIImageView()
+        let myFotoImage = UIImage(named: "KirKost")
+        myView = UIImageView(image: myFotoImage)
+        myView.layer.cornerRadius = 75
+        myView.contentMode = .scaleAspectFill
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        myView.layer.borderWidth = 3
+        myView.layer.borderColor = UIColor.white.cgColor
+        myView.clipsToBounds = true
+        return myView
         
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.newFotoImage()
-        addSubview(button)
-        buttonAction()
-        addSubview(labelFirst)
-        addSubview(labelSecond)
-        addSubview(labelStatus)
+        addSubviews(
+            buttonSecond,
+            avatarImageView,
+            setStatusButton,
+            fullNameLabel,
+            statusLabel,
+            statusTextField)
+        newFunc()
     }
     required init?(coder: NSCoder) {
-        nil
+        fatalError("init(coder:) has not been inplemented")
     }
     
-    private func newFotoImage(){
-        var myView = UIImageView()
-        let myFotoImage = UIImage(named: "KirKost")
-        myView = UIImageView(image: myFotoImage)
-        myView.layer.cornerRadius = 75
-        myView.translatesAutoresizingMaskIntoConstraints = false
-        myView.layer.borderWidth = 3
-        myView.layer.borderColor = UIColor.white.cgColor
-        myView.clipsToBounds = true
-        myView.frame = CGRect(x: 16, y: 100, width: 150, height: 150)
-        addSubview(myView)
+    
+    func newFunc(){
+        NSLayoutConstraint.activate([
+            self.setStatusButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            self.setStatusButton.topAnchor.constraint(equalTo:avatarImageView.bottomAnchor , constant: 32),
+            self.setStatusButton.widthAnchor.constraint(equalToConstant: 360),
+            self.setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            self.setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            
+            fullNameLabel.self.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            fullNameLabel.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 180),
+            
+            statusLabel.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 180),
+            statusLabel.self.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -55),
+            
+            statusTextField.self.widthAnchor.constraint(equalToConstant: 195),
+            
+            statusTextField.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 180),
+            statusTextField.self.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
+            statusTextField.self.heightAnchor.constraint(equalToConstant: 30),
+            
+            avatarImageView.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            avatarImageView.self.widthAnchor.constraint(equalToConstant: 150),
+            avatarImageView.self.heightAnchor.constraint(equalToConstant: 150),
+            avatarImageView.self.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            
+            buttonSecond.self.leftAnchor.constraint(equalTo: self.leftAnchor),
+            buttonSecond.self.rightAnchor.constraint(equalTo: self.rightAnchor),
+            buttonSecond.self.topAnchor.constraint(equalTo: self.setStatusButton.bottomAnchor, constant: 100)
+            
+            
+        ])
+    }
+    
+    @objc private func buttonAction(){
+        statusLabel.text = statusTextField.text
+        statusTextField.text = ""
         
     }
-    @objc private func buttonAction(){
-        labelSecond.text = labelStatus.text
-        print(labelStatus.text)
-        
+   
+}
+extension UIView{
+    func addSubviews(_ subwiews: UIView ...){
+        subwiews.forEach({addSubview($0)})
     }
 }
