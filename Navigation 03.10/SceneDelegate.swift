@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let tapBarController = UITabBarController()
         firstTapBarController = UINavigationController.init(rootViewController: FeedViewController())
-        secondTapBarController = UINavigationController.init(rootViewController: ProfileViewController())
+        secondTapBarController = UINavigationController.init(rootViewController: LogInViewController())
         tapBarController.viewControllers = [firstTapBarController,secondTapBarController]
         let item1 = UITabBarItem(title: "Лента", image: UIImage(systemName: "doc"), tag: 0)
         let item2 = UITabBarItem(title: "Профиль", image: UIImage(systemName: "paperplane"), tag: 1)
@@ -31,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = tapBarController
         window.makeKeyAndVisible()
         self.window = window
+    
     }
     
 

@@ -18,8 +18,7 @@ class ProfileViewController: UIViewController {
         NSLayoutConstraint.activate([
             viewNew.leftAnchor.constraint(equalTo: view.leftAnchor),
             viewNew.rightAnchor.constraint(equalTo: view.rightAnchor),
-            viewNew.topAnchor.constraint(equalTo: view.topAnchor),
-            viewNew.widthAnchor.constraint(equalTo: view.widthAnchor)
+            viewNew.topAnchor.constraint(equalTo: view.topAnchor)
     
         ])
     }

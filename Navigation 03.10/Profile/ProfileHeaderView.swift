@@ -30,6 +30,7 @@ class ProfileHeaderView:UIView {
         button.setTitle("New button", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = .black
+        button.addTarget(self, action: #selector(buttonActionSecond), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 7
         return button
@@ -94,16 +95,17 @@ class ProfileHeaderView:UIView {
             fullNameLabel,
             statusLabel,
             statusTextField)
-        newFunc()
+        setupConstrait()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been inplemented")
     }
     
     
-    func newFunc(){
+    func setupConstrait(){
         NSLayoutConstraint.activate([
             self.setStatusButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            self.setStatusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             self.setStatusButton.topAnchor.constraint(equalTo:avatarImageView.bottomAnchor , constant: 32),
             self.setStatusButton.widthAnchor.constraint(equalToConstant: 360),
             self.setStatusButton.heightAnchor.constraint(equalToConstant: 50),
@@ -120,6 +122,7 @@ class ProfileHeaderView:UIView {
             statusTextField.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 180),
             statusTextField.self.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
             statusTextField.self.heightAnchor.constraint(equalToConstant: 30),
+            statusTextField.self.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
             avatarImageView.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             avatarImageView.self.widthAnchor.constraint(equalToConstant: 150),
@@ -139,10 +142,9 @@ class ProfileHeaderView:UIView {
         statusTextField.text = ""
         
     }
-   
-}
-extension UIView{
-    func addSubviews(_ subwiews: UIView ...){
-        subwiews.forEach({addSubview($0)})
+    @objc private func buttonActionSecond(){
+        let profileViewController = ProfileViewController()
+        self.inputViewController?.navigationController?.pushViewController(profileViewController, animated: true)
     }
+   
 }

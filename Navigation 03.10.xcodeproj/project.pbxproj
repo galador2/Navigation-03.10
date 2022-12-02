@@ -18,6 +18,8 @@
 		457163BC28EB89C500B5F086 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457163BB28EB89C500B5F086 /* Post.swift */; };
 		457163BE28EB8E9200B5F086 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457163BD28EB8E9200B5F086 /* InfoViewController.swift */; };
 		458331E6291408A8002CFDFD /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331E5291408A8002CFDFD /* ProfileHeaderView.swift */; };
+		458331E82934F314002CFDFD /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331E72934F314002CFDFD /* LogInViewController.swift */; };
+		458331EE29364908002CFDFD /* extensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331ED29364908002CFDFD /* extensionUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		457163BB28EB89C500B5F086 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		457163BD28EB8E9200B5F086 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		458331E5291408A8002CFDFD /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		458331E72934F314002CFDFD /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		458331ED29364908002CFDFD /* extensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 			children = (
 				457163B728EB1EF300B5F086 /* ProfileViewController.swift */,
 				458331E5291408A8002CFDFD /* ProfileHeaderView.swift */,
+				458331E72934F314002CFDFD /* LogInViewController.swift */,
+				458331ED29364908002CFDFD /* extensionUIView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -162,12 +168,14 @@
 			files = (
 				457163BA28EB7C5B00B5F086 /* PostViewController.swift in Sources */,
 				457163A628EB102400B5F086 /* ViewController.swift in Sources */,
+				458331EE29364908002CFDFD /* extensionUIView.swift in Sources */,
 				457163A228EB102400B5F086 /* AppDelegate.swift in Sources */,
 				457163B828EB1EF300B5F086 /* ProfileViewController.swift in Sources */,
 				458331E6291408A8002CFDFD /* ProfileHeaderView.swift in Sources */,
 				457163B628EB1EE000B5F086 /* FeedViewController.swift in Sources */,
 				457163BC28EB89C500B5F086 /* Post.swift in Sources */,
 				457163BE28EB8E9200B5F086 /* InfoViewController.swift in Sources */,
+				458331E82934F314002CFDFD /* LogInViewController.swift in Sources */,
 				457163A428EB102400B5F086 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
