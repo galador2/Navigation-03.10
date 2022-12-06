@@ -14,6 +14,17 @@ class ProfileViewController: UIViewController {
         return viewNew
     }()
     
+        let buttonSecond:UIButton = {
+           let button = UIButton()
+            button.setTitle("New button", for: .normal)
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.backgroundColor = .black
+            button.frame = CGRect(x: 0, y: 500, width: 100, height: 50)
+            button.layer.cornerRadius = 7
+            return button
+    
+        }()
+    
     private func setupConstraint(){
         NSLayoutConstraint.activate([
             viewNew.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -29,6 +40,7 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .lightGray
         view.addSubview(viewNew)
         setupConstraint()
+        view.addSubviews(buttonSecond)
      
     
     }

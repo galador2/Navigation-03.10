@@ -20,6 +20,10 @@ class LogInViewController: UIViewController{
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
+        stackView.layer.cornerRadius = 10
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.clipsToBounds = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
         
@@ -93,15 +97,18 @@ class LogInViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        addSubview()
+        viewConstrain()
+        setupGestures()
+    }
+    
+    private func addSubview(){
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(stackView)
         self.stackView.addArrangedSubview(login)
         self.stackView.addArrangedSubview(password)
-        self.stackView.addArrangedSubview(button)
+        self.view.addSubview(button)
         self.view.addSubview(pictureVK)
-        viewConstrain()
-        setupGestures()
-        stackView.setCustomSpacing(16, after: password)
     }
     
     private func setupGestures(){
@@ -140,17 +147,24 @@ class LogInViewController: UIViewController{
             self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
            
-            self.stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            self.stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
-            self.stackView.heightAnchor.constraint(equalToConstant: 150),
-            self.stackView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor, constant: 20),
-            self.stackView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor, constant: 30),
+            self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
+            self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
+            self.stackView.heightAnchor.constraint(equalToConstant: 100),
+            self.stackView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            self.stackView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor),
             
           
-            self.pictureVK.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 120),
             self.pictureVK.widthAnchor.constraint(equalToConstant: 100),
             self.pictureVK.heightAnchor.constraint(equalToConstant: 100),
             self.pictureVK.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            self.pictureVK.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            
+            
+            
+            self.button.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
+            self.button.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
+            self.button.heightAnchor.constraint(equalToConstant: 50),
+            self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
 
         ])
     }
@@ -175,9 +189,9 @@ class LogInViewController: UIViewController{
 
             let keyboardOriginY = self.view.frame.height - keyboardHeight
 
-           // let yOffset = keyboardOriginY < loginButtonBottomPointY
-            let yOffset = loginButtonBottomPointY < keyboardOriginY
-            ? loginButtonBottomPointY - keyboardOriginY + 20
+            let yOffset = keyboardOriginY < loginButtonBottomPointY
+           
+            ? loginButtonBottomPointY - keyboardOriginY - 270
             : 0
 
 

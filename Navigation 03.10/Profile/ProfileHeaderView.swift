@@ -9,6 +9,11 @@ import UIKit
 
 class ProfileHeaderView:UIView {
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        return tableView
+    }()
+    
     let setStatusButton:UIButton = {
         let button1 = UIButton()
         button1.setTitle("Set status", for: .normal)
@@ -23,18 +28,6 @@ class ProfileHeaderView:UIView {
         button1.translatesAutoresizingMaskIntoConstraints = false
         return button1
         
-    }()
-    
-    let buttonSecond:UIButton = {
-       let button = UIButton()
-        button.setTitle("New button", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = .black
-        button.addTarget(self, action: #selector(buttonActionSecond), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 7
-        return button
-      
     }()
     
     private let fullNameLabel:UILabel = {
@@ -89,7 +82,6 @@ class ProfileHeaderView:UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews(
-            buttonSecond,
             avatarImageView,
             setStatusButton,
             fullNameLabel,
@@ -100,6 +92,7 @@ class ProfileHeaderView:UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been inplemented")
     }
+    
     
     
     func setupConstrait(){
@@ -128,12 +121,7 @@ class ProfileHeaderView:UIView {
             avatarImageView.self.widthAnchor.constraint(equalToConstant: 150),
             avatarImageView.self.heightAnchor.constraint(equalToConstant: 150),
             avatarImageView.self.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            
-            buttonSecond.self.leftAnchor.constraint(equalTo: self.leftAnchor),
-            buttonSecond.self.rightAnchor.constraint(equalTo: self.rightAnchor),
-            buttonSecond.self.topAnchor.constraint(equalTo: self.setStatusButton.bottomAnchor, constant: 100)
-            
-            
+
         ])
     }
     
@@ -141,10 +129,6 @@ class ProfileHeaderView:UIView {
         statusLabel.text = statusTextField.text
         statusTextField.text = ""
         
-    }
-    @objc private func buttonActionSecond(){
-        let profileViewController = ProfileViewController()
-        self.inputViewController?.navigationController?.pushViewController(profileViewController, animated: true)
     }
    
 }
