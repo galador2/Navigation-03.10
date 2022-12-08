@@ -11,8 +11,18 @@ class ProfileHeaderView:UIView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 250
+        tableView.backgroundColor = .black
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    var newPost:[PostScreen] = [
+        PostScreen(authorLabel: "kirill.kostenko", descriptionLabel: "my first foto", imageLabel: "VIEW", likesLabel: 10, viewslabel: 10)
+    ]
+
     
     let setStatusButton:UIButton = {
         let button1 = UIButton()
@@ -121,6 +131,14 @@ class ProfileHeaderView:UIView {
             avatarImageView.self.widthAnchor.constraint(equalToConstant: 150),
             avatarImageView.self.heightAnchor.constraint(equalToConstant: 150),
             avatarImageView.self.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            
+            tableView.self.widthAnchor.constraint(equalToConstant: 300),
+            tableView.self.heightAnchor.constraint(equalToConstant: 300),
+        
+            
+            
+            
+        
 
         ])
     }

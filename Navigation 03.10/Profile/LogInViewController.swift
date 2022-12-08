@@ -175,7 +175,7 @@ class LogInViewController: UIViewController{
     }
     
     @objc private func setupButtonLogIn(){
-        let profileViewController = ProfileViewController()
+        let profileViewController = ProfileViewController ()
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
     

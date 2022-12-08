@@ -20,6 +20,8 @@
 		458331E6291408A8002CFDFD /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331E5291408A8002CFDFD /* ProfileHeaderView.swift */; };
 		458331E82934F314002CFDFD /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331E72934F314002CFDFD /* LogInViewController.swift */; };
 		458331EE29364908002CFDFD /* extensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331ED29364908002CFDFD /* extensionUIView.swift */; };
+		458331F0293F7853002CFDFD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331EF293F7853002CFDFD /* PostTableViewCell.swift */; };
+		458331F4293FCDFB002CFDFD /* PostScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331F3293FCDFB002CFDFD /* PostScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		458331E5291408A8002CFDFD /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		458331E72934F314002CFDFD /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		458331ED29364908002CFDFD /* extensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUIView.swift; sourceTree = "<group>"; };
+		458331EF293F7853002CFDFD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		458331F3293FCDFB002CFDFD /* PostScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 				458331E5291408A8002CFDFD /* ProfileHeaderView.swift */,
 				458331E72934F314002CFDFD /* LogInViewController.swift */,
 				458331ED29364908002CFDFD /* extensionUIView.swift */,
+				458331EF293F7853002CFDFD /* PostTableViewCell.swift */,
+				458331F3293FCDFB002CFDFD /* PostScreen.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -172,9 +178,11 @@
 				457163A228EB102400B5F086 /* AppDelegate.swift in Sources */,
 				457163B828EB1EF300B5F086 /* ProfileViewController.swift in Sources */,
 				458331E6291408A8002CFDFD /* ProfileHeaderView.swift in Sources */,
+				458331F4293FCDFB002CFDFD /* PostScreen.swift in Sources */,
 				457163B628EB1EE000B5F086 /* FeedViewController.swift in Sources */,
 				457163BC28EB89C500B5F086 /* Post.swift in Sources */,
 				457163BE28EB8E9200B5F086 /* InfoViewController.swift in Sources */,
+				458331F0293F7853002CFDFD /* PostTableViewCell.swift in Sources */,
 				458331E82934F314002CFDFD /* LogInViewController.swift in Sources */,
 				457163A428EB102400B5F086 /* SceneDelegate.swift in Sources */,
 			);
