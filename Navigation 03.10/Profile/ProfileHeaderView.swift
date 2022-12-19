@@ -7,23 +7,9 @@
 
 import UIKit
 
-class ProfileHeaderView:UIView {
+class ProfileHeaderView: UITableViewHeaderFooterView {
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 250
-        tableView.backgroundColor = .black
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
-    
-    var newPost:[PostScreen] = [
-        PostScreen(authorLabel: "kirill.kostenko", descriptionLabel: "my first foto", imageLabel: "VIEW", likesLabel: 10, viewslabel: 10)
-    ]
 
-    
     let setStatusButton:UIButton = {
         let button1 = UIButton()
         button1.setTitle("Set status", for: .normal)
@@ -37,7 +23,7 @@ class ProfileHeaderView:UIView {
         button1.addTarget(self, action: #selector(buttonAction), for:.touchUpInside)
         button1.translatesAutoresizingMaskIntoConstraints = false
         return button1
-        
+
     }()
     
     private let fullNameLabel:UILabel = {
@@ -48,7 +34,7 @@ class ProfileHeaderView:UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private let statusLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -56,9 +42,9 @@ class ProfileHeaderView:UIView {
         label.text = "Мой статус"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-        
+
     }()
-    
+
     private let statusTextField: UITextField = {
         let label = UITextField()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -72,7 +58,7 @@ class ProfileHeaderView:UIView {
         label.leftViewMode = .always
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-        
+
     }()
     
     private lazy var avatarImageView: UIImageView = {
@@ -86,22 +72,22 @@ class ProfileHeaderView:UIView {
         myView.layer.borderColor = UIColor.white.cgColor
         myView.clipsToBounds = true
         return myView
-        
+
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubviews(
-            avatarImageView,
-            setStatusButton,
-            fullNameLabel,
-            statusLabel,
-            statusTextField)
+    override init(reuseIdentifier: String?) {
+           super.init(reuseIdentifier: reuseIdentifier)
+        self.addSubviews(avatarImageView)
+        self.addSubviews(setStatusButton)
+        self.addSubviews(fullNameLabel)
+        self.addSubviews(statusLabel)
+        self.addSubviews(statusTextField)
         setupConstrait()
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been inplemented")
-    }
+       }
+
+       required init?(coder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+       }
     
     
     
@@ -113,40 +99,35 @@ class ProfileHeaderView:UIView {
             self.setStatusButton.widthAnchor.constraint(equalToConstant: 360),
             self.setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             self.setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            
+
             fullNameLabel.self.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
             fullNameLabel.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 180),
-            
+
             statusLabel.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 180),
             statusLabel.self.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -55),
-            
+
             statusTextField.self.widthAnchor.constraint(equalToConstant: 195),
-            
+
             statusTextField.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 180),
             statusTextField.self.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
             statusTextField.self.heightAnchor.constraint(equalToConstant: 30),
             statusTextField.self.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
+
             avatarImageView.self.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             avatarImageView.self.widthAnchor.constraint(equalToConstant: 150),
             avatarImageView.self.heightAnchor.constraint(equalToConstant: 150),
             avatarImageView.self.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            
-            tableView.self.widthAnchor.constraint(equalToConstant: 300),
-            tableView.self.heightAnchor.constraint(equalToConstant: 300),
-        
-            
-            
-            
-        
+
+
+
 
         ])
     }
-    
+
     @objc private func buttonAction(){
         statusLabel.text = statusTextField.text
         statusTextField.text = ""
-        
+
     }
    
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 struct PostScreen{
-    let authorLabel:String
-    let descriptionLabel:String
-    let imageLabel:String
-    let likesLabel:Int
-    let viewslabel:Int
+//    let authorLabel:String 
+//    let descriptionLabel:String
+//    let imageLabel:String 
+//    let likesLabel:Int
+//    let viewslabel:Int
 }

@@ -97,12 +97,12 @@ class LogInViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        addSubview()
+        setupLayout()
         viewConstrain()
         setupGestures()
     }
     
-    private func addSubview(){
+    private func setupLayout(){
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(stackView)
         self.stackView.addArrangedSubview(login)
@@ -157,7 +157,7 @@ class LogInViewController: UIViewController{
             self.pictureVK.widthAnchor.constraint(equalToConstant: 100),
             self.pictureVK.heightAnchor.constraint(equalToConstant: 100),
             self.pictureVK.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
-            self.pictureVK.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            self.pictureVK.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -40),
             
             
             
