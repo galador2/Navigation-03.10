@@ -17,7 +17,6 @@ class PostTableViewCell: UITableViewCell {
         let views:String
     }
     
-    
     private lazy var authorLabel:UILabel = {
         let author = UILabel()
         author.font = UIFont.systemFont(ofSize: 20, weight: .bold)
