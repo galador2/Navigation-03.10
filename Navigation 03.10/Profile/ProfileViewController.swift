@@ -101,6 +101,7 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == .zero {
             let photosViewController = PhotosViewController()
             self.navigationController?.pushViewController(photosViewController, animated: true)}
+      
     }
         
     }

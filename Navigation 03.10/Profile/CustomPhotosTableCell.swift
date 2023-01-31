@@ -125,33 +125,29 @@ class CustomPhotosTableCell: UITableViewCell {
             
             self.firstImage.topAnchor.constraint(equalTo: self.photoLogo.bottomAnchor, constant: 12),
             self.firstImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-            self.firstImage.widthAnchor.constraint(equalToConstant: 85),
-            self.firstImage.heightAnchor.constraint(equalToConstant: 70),
+            self.firstImage.widthAnchor.constraint(equalToConstant: 95),
+            self.firstImage.heightAnchor.constraint(equalToConstant: 80),
             self.firstImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
             
             
             self.secondImage.leadingAnchor.constraint(equalTo: self.firstImage.trailingAnchor, constant: 8),
-            self.secondImage.widthAnchor.constraint(equalToConstant: 85),
-            self.secondImage.heightAnchor.constraint(equalToConstant: 70),
+            self.secondImage.widthAnchor.constraint(equalToConstant: 95),
+            self.secondImage.heightAnchor.constraint(equalToConstant: 80),
             self.secondImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -12),
             
             
             self.thirdImage.leadingAnchor.constraint(equalTo: self.secondImage.trailingAnchor,constant: 8),
-            self.thirdImage.widthAnchor.constraint(equalToConstant: 85),
-            self.thirdImage.heightAnchor.constraint(equalToConstant: 70),
+            self.thirdImage.widthAnchor.constraint(equalToConstant: 95),
+            self.thirdImage.heightAnchor.constraint(equalToConstant: 80),
             self.thirdImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -12),
             
             self.fourthImage.leadingAnchor.constraint(equalTo: self.thirdImage.trailingAnchor,constant: 8),
-            self.fourthImage.widthAnchor.constraint(equalToConstant: 85),
-            self.fourthImage.heightAnchor.constraint(equalToConstant: 70),
-            self.fourthImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12)
+            self.fourthImage.widthAnchor.constraint(equalToConstant: 95),
+            self.fourthImage.heightAnchor.constraint(equalToConstant: 80),
+            self.fourthImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
+            self.fourthImage.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12)
             
         ])
     }
-    
-//    @objc private func fotoPush(){
-//        let photosViewController = PhotosViewController()
-//        UINavigationController.pushViewController(photosViewController, animated: true)
-//    }
     
 }
