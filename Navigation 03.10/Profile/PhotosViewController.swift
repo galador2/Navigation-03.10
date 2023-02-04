@@ -18,7 +18,7 @@ class PhotosViewController: UIViewController, UINavigationBarDelegate, UIGesture
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 35, left: 9, bottom: 0, right: 9)
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 9, bottom: 0, right: 9)
         return layout
     }()
     
@@ -64,30 +64,9 @@ class PhotosViewController: UIViewController, UINavigationBarDelegate, UIGesture
     }
     
     private func setupNavigationBar(){
-        let height: CGFloat = -50
-        let navbar = UINavigationBar(frame: CGRect(x: 0, y: 45, width: UIScreen.main.bounds.width, height: height))
-        navbar.delegate = self
-        navbar.isHidden = false
-        navbar.isTranslucent = false
-        navbar.backgroundColor = .white
-        
-        
-        let navItem = UINavigationItem()
-        navItem.title = "Photo Gallery"
-      
-        navItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtom))
-    
-        navbar.items = [navItem]
-    
-        view.addSubview(navbar)
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.title = "Photo Gallery"
 
-        collectionView.frame = CGRect(x: 0, y: height, width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height - height))
-    
-    }
-    
-    @objc private func backButtom(_sender:UINavigationBar){
-        self.navigationController?.pushViewController(FeedViewController(), animated: true)
-        //self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
    
     
@@ -137,11 +116,6 @@ extension PhotosViewController:UICollectionViewDataSource, UICollectionViewDeleg
     
     
     }
-    
-//        self.navigationController?.navigationBar.isHidden = true
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
-//        self.navigationItem.title = "Photo Gallery"
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white, NSAttributedString.Key.font: UIFont(descriptor:UIFontDescriptor(name: "Photo Gallery", size: 20), size: 20)]
     
     
     

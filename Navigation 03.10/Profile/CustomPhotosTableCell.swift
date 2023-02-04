@@ -67,7 +67,6 @@ class CustomPhotosTableCell: UITableViewCell {
         fourthImage.contentMode = .scaleAspectFill
         fourthImage.layer.cornerRadius = 6
         fourthImage.clipsToBounds = true
-        
         fourthImage.translatesAutoresizingMaskIntoConstraints = false
         return fourthImage
         
@@ -125,25 +124,25 @@ class CustomPhotosTableCell: UITableViewCell {
             
             self.firstImage.topAnchor.constraint(equalTo: self.photoLogo.bottomAnchor, constant: 12),
             self.firstImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-            self.firstImage.widthAnchor.constraint(equalToConstant: 95),
-            self.firstImage.heightAnchor.constraint(equalToConstant: 80),
+            self.firstImage.heightAnchor.constraint(equalTo: self.firstImage.widthAnchor, multiplier: 1.0),
             self.firstImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
             
             
+            self.secondImage.topAnchor.constraint(equalTo: self.photoLogo.bottomAnchor, constant: 12),
             self.secondImage.leadingAnchor.constraint(equalTo: self.firstImage.trailingAnchor, constant: 8),
-            self.secondImage.widthAnchor.constraint(equalToConstant: 95),
-            self.secondImage.heightAnchor.constraint(equalToConstant: 80),
+            self.secondImage.heightAnchor.constraint(equalTo: self.secondImage.widthAnchor, multiplier: 1.0),
             self.secondImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -12),
             
             
+            self.thirdImage.topAnchor.constraint(equalTo: self.photoLogo.bottomAnchor, constant: 12),
             self.thirdImage.leadingAnchor.constraint(equalTo: self.secondImage.trailingAnchor,constant: 8),
-            self.thirdImage.widthAnchor.constraint(equalToConstant: 95),
-            self.thirdImage.heightAnchor.constraint(equalToConstant: 80),
+            self.thirdImage.heightAnchor.constraint(equalTo: self.thirdImage.widthAnchor, multiplier: 1.0),
             self.thirdImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -12),
             
+            
+            self.fourthImage.topAnchor.constraint(equalTo: self.photoLogo.bottomAnchor, constant: 12),
             self.fourthImage.leadingAnchor.constraint(equalTo: self.thirdImage.trailingAnchor,constant: 8),
-            self.fourthImage.widthAnchor.constraint(equalToConstant: 95),
-            self.fourthImage.heightAnchor.constraint(equalToConstant: 80),
+            self.fourthImage.heightAnchor.constraint(equalTo: self.fourthImage.widthAnchor, multiplier: 1.0),
             self.fourthImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
             self.fourthImage.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12)
             

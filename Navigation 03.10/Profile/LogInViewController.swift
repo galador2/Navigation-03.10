@@ -85,7 +85,7 @@ class LogInViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.navigationBar.isHidden = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 

@@ -22,6 +22,13 @@ class ProfileViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+   
+    private var avatarViewWidthConstaint:NSLayoutConstraint?
+    private var avatarViewHightConstaint: NSLayoutConstraint?
+    private var isImageViewIncreased = false
+
+
+    
     
     var newPost:[PostTableViewCell.PostView] = [
         PostTableViewCell.PostView(author: "kirill.kostenko", image: UIImage(named: "first"), description: "Я помню чудное мгновенье: Передо мной явилась ты, Как мимолетное виденье, Как гений чистой красоты.", likes: "Likes:10", views: "Views:10"),
@@ -35,6 +42,21 @@ class ProfileViewController: UIViewController {
         CustomPhotosTableCell.fotoView(logo: "Photos", systemImage: UIImage(systemName: "arrow.right"), image1: UIImage(named: "foto1"), image2: UIImage(named: "foto2"), image3: UIImage(named: "foto3"), image4: UIImage(named: "foto4"))
     ]
     
+    var avatarTap:UIImageView = {
+       var avatar = UIImageView()
+       let newAvatar = UIImage(named: "foto1")
+       avatar = UIImageView(image: newAvatar)
+        let tap = UITapGestureRecognizer(target:self, action: #selector(didTapAnimationButton))
+       avatar.addGestureRecognizer(tap)
+       avatar.isUserInteractionEnabled = true
+       avatar.layer.cornerRadius = 75
+       avatar.contentMode = .scaleAspectFill
+       avatar.translatesAutoresizingMaskIntoConstraints = false
+       avatar.layer.borderWidth = 3
+       avatar.layer.borderColor = UIColor.white.cgColor
+       avatar.clipsToBounds = true
+       return avatar
+   }()
 
 
     private func setupConstraint(){
@@ -48,27 +70,84 @@ class ProfileViewController: UIViewController {
         ])
     }
     
+    func addAvatarConstraint(){
+        self.avatarViewWidthConstaint =
+        avatarTap.widthAnchor.constraint(equalToConstant: 150)
+        self.avatarViewHightConstaint =
+        avatarTap.heightAnchor.constraint(equalToConstant: 150)
+        
+        NSLayoutConstraint.activate([
+            avatarTap.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor, constant: 16),
+            avatarTap.topAnchor.constraint(equalTo: self.tableView.topAnchor,constant: 16),
+            self.avatarViewWidthConstaint,
+            self.avatarViewHightConstaint
+        ].compactMap({ $0 }))
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
         setupConstraint()
+        navigationController?.navigationBar.isHidden = true
         
     }
+    
+//    @objc func fullScreen(tapGestureRecognizer :UITapGestureRecognizer){
+//       // self.view?.removeFromSuperview()
+//       // let tap = tapGestureRecognizer.view as! UIImageView
+//        UIView.animate(withDuration: 1.0) {
+//            self.avatarTap.transform = self.isImageViewIncreased
+//            ? .identity
+//            : CGAffineTransform(scaleX: 2.0, y: 2.0)
+//        } completion: { _ in
+//            self.isImageViewIncreased.toggle()
+//        }
+//       print("good")
+//    }
+           @objc func didTapAnimationButton() {
+               self.avatarTap.isUserInteractionEnabled = false
+    
+                let completion: () -> Void = { [weak self] in
+                    self?.avatarTap.isUserInteractionEnabled = true
+                }
+    
+               self.layoutAvatar(completion: completion)
+            }
+    
+            func layoutAvatar(completion: @escaping()->Void){
+//                self.avatarViewWidthConstaint?.constant = self.isImageViewIncreased ? 100: self.view.bounds.width
+//                self.avatarViewHightConstaint?.constant = self.isImageViewIncreased ? 100: self.view.bounds.width
+                UIView.animate(withDuration: 3.0, delay: 0.0, options: .curveEaseInOut) {
+                    self.avatarTap.transform = self.isImageViewIncreased
+                               ? .identity
+                               : CGAffineTransform(scaleX: 1.0, y: 1.0)
+                           } completion: { _ in
+                               self.isImageViewIncreased.toggle()
+                           }
+                          
+                }
+    
    
 }
 
 extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
 
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        self.tableView.addSubview(avatarTap)
+        addAvatarConstraint()
+        didTapAnimationButton()
+
         if section == 0 {
             guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView else { return nil }
 
             let viewModel = ProfileHeaderView()
+            
             return headerView
-
+            
         }
-
+        
         return nil
         
     }
@@ -100,9 +179,13 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == .zero {
             let photosViewController = PhotosViewController()
+            photosViewController.title = title
             self.navigationController?.pushViewController(photosViewController, animated: true)}
+        
+        
       
     }
+    
         
     }
     

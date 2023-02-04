@@ -31,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = tapBarController
         window.makeKeyAndVisible()
         self.window = window
+        
     
     }
     
