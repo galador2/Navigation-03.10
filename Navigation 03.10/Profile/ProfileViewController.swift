@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
         CustomPhotosTableCell.fotoView(logo: "Photos", systemImage: UIImage(systemName: "arrow.right"), image1: UIImage(named: "foto1"), image2: UIImage(named: "foto2"), image3: UIImage(named: "foto3"), image4: UIImage(named: "foto4"))
     ]
     
-    var avatarTap:UIImageView = {
+    private lazy var avatarTap:UIImageView = {
        var avatar = UIImageView()
        let newAvatar = UIImage(named: "foto1")
        avatar = UIImageView(image: newAvatar)
@@ -92,43 +92,64 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
     }
+
+    @objc private func didTapAnimationButton() {
+        self.avatarTap.isUserInteractionEnabled = false
+        
+        let completion: () -> Void = { [weak self] in
+            self?.avatarTap.isUserInteractionEnabled = true
+        }
+
+        self.animateKeyframes(completion: completion)
+    }
     
-//    @objc func fullScreen(tapGestureRecognizer :UITapGestureRecognizer){
-//       // self.view?.removeFromSuperview()
-//       // let tap = tapGestureRecognizer.view as! UIImageView
-//        UIView.animate(withDuration: 1.0) {
+    private func animateKeyframes(completion: @escaping () -> Void) {
+        //        let widht = self.view.frame.width
+        //        let hight = self.view.frame.width
+        
+                self.avatarViewHightConstaint?.constant = self.view.frame.width - 240
+                self.avatarViewWidthConstaint?.constant = self.view.frame.width - 240
+        
+                UIView.animateKeyframes(withDuration: 5.0, delay: 0, options: .calculationModeCubic) {
+        
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.30){
+                        self.avatarTap.center = self.view.center
+        
+                    }
+        
+                    UIView.addKeyframe(withRelativeStartTime: 0.50, relativeDuration: 0.35){
+                        self.avatarTap.transform = self.isImageViewIncreased
+                                    ? .identity :
+                        CGAffineTransform(scaleX: 2.0, y: 2.0)
+        
+                    }
+        
+                    UIView.addKeyframe(withRelativeStartTime: 1, relativeDuration: 0.35){
+                        self.avatarTap.center = self.view.center
+                        self.avatarTap.transform = .identity
+                    }
+                }
+        
+            completion: { _ in
+                completion()
+            }
+//        self.avatarViewWidthConstaint?.constant = self.isImageViewIncreased ? 150:
+//        self.view.bounds.width - 240
+//        self.avatarViewHightConstaint?.constant = self.isImageViewIncreased ? 150:
+//        self.view.bounds.width - 240
+//
+//        UIView.animate(withDuration: 5.0, delay: 0.0, options: .curveEaseInOut) {
+//            self.avatarTap.alpha = 0.9
+//            self.avatarTap.center = self.view.center
+//            self.view.layoutIfNeeded()
+//            //self.avatarTap.transform = .identity
 //            self.avatarTap.transform = self.isImageViewIncreased
 //            ? .identity
-//            : CGAffineTransform(scaleX: 2.0, y: 2.0)
+//            : CGAffineTransform(scaleX: 2, y: 2 )
 //        } completion: { _ in
-//            self.isImageViewIncreased.toggle()
+//
 //        }
-//       print("good")
-//    }
-           @objc func didTapAnimationButton() {
-               self.avatarTap.isUserInteractionEnabled = false
-    
-                let completion: () -> Void = { [weak self] in
-                    self?.avatarTap.isUserInteractionEnabled = true
-                }
-    
-               self.layoutAvatar(completion: completion)
-            }
-    
-            func layoutAvatar(completion: @escaping()->Void){
-//                self.avatarViewWidthConstaint?.constant = self.isImageViewIncreased ? 100: self.view.bounds.width
-//                self.avatarViewHightConstaint?.constant = self.isImageViewIncreased ? 100: self.view.bounds.width
-                UIView.animate(withDuration: 3.0, delay: 0.0, options: .curveEaseInOut) {
-                    self.avatarTap.transform = self.isImageViewIncreased
-                               ? .identity
-                               : CGAffineTransform(scaleX: 1.0, y: 1.0)
-                           } completion: { _ in
-                               self.isImageViewIncreased.toggle()
-                           }
-                          
-                }
-    
-   
+    }
 }
 
 extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
