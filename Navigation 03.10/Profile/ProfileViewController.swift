@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
        avatar = UIImageView(image: newAvatar)
         let tap = UITapGestureRecognizer(target:self, action: #selector(didTapAnimationButton))
        avatar.addGestureRecognizer(tap)
-       avatar.isUserInteractionEnabled = true
+       //avatar.isUserInteractionEnabled = true
        avatar.layer.cornerRadius = 75
        avatar.contentMode = .scaleAspectFill
        avatar.translatesAutoresizingMaskIntoConstraints = false
@@ -71,16 +71,18 @@ class ProfileViewController: UIViewController {
     }
     
     func addAvatarConstraint(){
+        self.tableView.addSubview(avatarTap)
+        
         self.avatarViewWidthConstaint =
         avatarTap.widthAnchor.constraint(equalToConstant: 150)
         self.avatarViewHightConstaint =
         avatarTap.heightAnchor.constraint(equalToConstant: 150)
         
         NSLayoutConstraint.activate([
-            avatarTap.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor, constant: 16),
-            avatarTap.topAnchor.constraint(equalTo: self.tableView.topAnchor,constant: 16),
-            self.avatarViewWidthConstaint,
-            self.avatarViewHightConstaint
+            avatarTap.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            avatarTap.topAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            self.avatarTap.widthAnchor.constraint(equalToConstant: 150),
+            self.avatarTap.heightAnchor.constraint(equalToConstant: 150)
         ].compactMap({ $0 }))
     }
     
@@ -104,49 +106,47 @@ class ProfileViewController: UIViewController {
     }
     
     private func animateKeyframes(completion: @escaping () -> Void) {
-        //        let widht = self.view.frame.width
-        //        let hight = self.view.frame.width
-        
-                self.avatarViewHightConstaint?.constant = self.view.frame.width - 240
-                self.avatarViewWidthConstaint?.constant = self.view.frame.width - 240
-        
+        let centerOrigin = self.avatarTap.center
+        self.view.layoutIfNeeded()
+
                 UIView.animateKeyframes(withDuration: 5.0, delay: 0, options: .calculationModeCubic) {
-        
                     UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.30){
                         self.avatarTap.center = self.view.center
-        
                     }
-        
-                    UIView.addKeyframe(withRelativeStartTime: 0.50, relativeDuration: 0.35){
-                        self.avatarTap.transform = self.isImageViewIncreased
-                                    ? .identity :
-                        CGAffineTransform(scaleX: 2.0, y: 2.0)
-        
+
+                    UIView.addKeyframe(withRelativeStartTime: 0.35, relativeDuration: 0.50){
+                        self.avatarTap.transform =
+                        CGAffineTransform(scaleX: self.view.frame.width / 150, y: self.view.frame.width / 150)
                     }
-        
+
                     UIView.addKeyframe(withRelativeStartTime: 1, relativeDuration: 0.35){
-                        self.avatarTap.center = self.view.center
+                        //self.avatarTap.center = self.view.center
                         self.avatarTap.transform = .identity
                     }
                 }
-        
+
             completion: { _ in
+                //self.avatarTap.transform = .identity
                 completion()
             }
 //        self.avatarViewWidthConstaint?.constant = self.isImageViewIncreased ? 150:
-//        self.view.bounds.width - 240
+//        self.view.bounds.width
 //        self.avatarViewHightConstaint?.constant = self.isImageViewIncreased ? 150:
-//        self.view.bounds.width - 240
+//        self.view.bounds.width
+        
+//        let startPoint = self.avatarTap.frame.origin
 //
 //        UIView.animate(withDuration: 5.0, delay: 0.0, options: .curveEaseInOut) {
 //            self.avatarTap.alpha = 0.9
 //            self.avatarTap.center = self.view.center
 //            self.view.layoutIfNeeded()
-//            //self.avatarTap.transform = .identity
+//            self.avatarTap.transform = .identity
 //            self.avatarTap.transform = self.isImageViewIncreased
 //            ? .identity
 //            : CGAffineTransform(scaleX: 2, y: 2 )
 //        } completion: { _ in
+//            self.avatarTap.center = self.avatarTap.frame.origin
+//            completion()
 //
 //        }
     }
@@ -202,7 +202,7 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
             let photosViewController = PhotosViewController()
             photosViewController.title = title
             self.navigationController?.pushViewController(photosViewController, animated: true)}
-        
+        didTapAnimationButton()
         
       
     }
