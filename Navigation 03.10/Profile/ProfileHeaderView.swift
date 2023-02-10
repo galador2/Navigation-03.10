@@ -118,9 +118,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             avatarImageView.self.heightAnchor.constraint(equalToConstant: 150),
             avatarImageView.self.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
 
-
-
-
         ])
     }
 

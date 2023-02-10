@@ -25,7 +25,13 @@ class ProfileViewController: UIViewController {
    
     private var avatarViewWidthConstaint:NSLayoutConstraint?
     private var avatarViewHightConstaint: NSLayoutConstraint?
+    private var avatarTopConstant: NSLayoutConstraint?
+    private var avatarLeadingConstant: NSLayoutConstraint?
     private var isImageViewIncreased = false
+    private var originalViewWidthConstaint:CGFloat?
+    private var originalViewHightConstaint:CGFloat?
+    private var originalTopConstant:CGFloat?
+    private var originalLeadingConstant:CGFloat?
 
 
     
@@ -42,13 +48,21 @@ class ProfileViewController: UIViewController {
         CustomPhotosTableCell.fotoView(logo: "Photos", systemImage: UIImage(systemName: "arrow.right"), image1: UIImage(named: "foto1"), image2: UIImage(named: "foto2"), image3: UIImage(named: "foto3"), image4: UIImage(named: "foto4"))
     ]
     
+    private lazy var blackView:UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.alpha = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var avatarTap:UIImageView = {
        var avatar = UIImageView()
-       let newAvatar = UIImage(named: "foto1")
+       let newAvatar = UIImage(named: "KirKost")
        avatar = UIImageView(image: newAvatar)
         let tap = UITapGestureRecognizer(target:self, action: #selector(didTapAnimationButton))
        avatar.addGestureRecognizer(tap)
-       //avatar.isUserInteractionEnabled = true
+       avatar.isUserInteractionEnabled = true
        avatar.layer.cornerRadius = 75
        avatar.contentMode = .scaleAspectFill
        avatar.translatesAutoresizingMaskIntoConstraints = false
@@ -57,98 +71,100 @@ class ProfileViewController: UIViewController {
        avatar.clipsToBounds = true
        return avatar
    }()
-
-
-    private func setupConstraint(){
-        NSLayoutConstraint.activate([
-
-            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-            
-        ])
-    }
     
-    func addAvatarConstraint(){
-        self.tableView.addSubview(avatarTap)
-        
+    private lazy var xButton:UIButton = {
+        var xButton = UIButton()
+        xButton.setImage(UIImage(named: "X"), for: .normal)
+        xButton.alpha = 0
+        xButton.addTarget(self, action: #selector(xButtonTouch), for: .touchUpInside)
+        xButton.translatesAutoresizingMaskIntoConstraints = false
+        return xButton
+    }()
+
+    
+   private func setupConstraint(){
         self.avatarViewWidthConstaint =
         avatarTap.widthAnchor.constraint(equalToConstant: 150)
         self.avatarViewHightConstaint =
         avatarTap.heightAnchor.constraint(equalToConstant: 150)
+        self.avatarTopConstant =  avatarTap.topAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.topAnchor, constant: 16)
+        self.avatarLeadingConstant =  avatarTap.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16)
+       
+       originalTopConstant = avatarTopConstant?.constant
+       originalLeadingConstant = avatarLeadingConstant?.constant
+       originalViewWidthConstaint = avatarViewWidthConstaint?.constant
+       originalViewHightConstaint = avatarViewHightConstaint?.constant
+        
+        self.view.addSubview(tableView)
+        self.view.addSubview(blackView)
+        self.view.addSubview(avatarTap)
+        self.view.addSubview(xButton)
         
         NSLayoutConstraint.activate([
-            avatarTap.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            avatarTap.topAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            self.avatarTap.widthAnchor.constraint(equalToConstant: 150),
-            self.avatarTap.heightAnchor.constraint(equalToConstant: 150)
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            
+            self.blackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.blackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.blackView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.blackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            
+            avatarLeadingConstant,
+            avatarTopConstant,
+            avatarViewWidthConstaint,
+            avatarViewHightConstaint,
+            
+            self.xButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
+            self.xButton.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 160),
+            self.xButton.widthAnchor.constraint(equalToConstant: 20),
+            self.xButton.heightAnchor.constraint(equalToConstant: 20)
         ].compactMap({ $0 }))
     }
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(tableView)
         setupConstraint()
         navigationController?.navigationBar.isHidden = true
+        let tap = UITapGestureRecognizer(target:self, action: #selector(didTapAnimationButton))
+        avatarTap.addGestureRecognizer(tap)
         
     }
+
 
     @objc private func didTapAnimationButton() {
-        self.avatarTap.isUserInteractionEnabled = false
-        
-        let completion: () -> Void = { [weak self] in
-            self?.avatarTap.isUserInteractionEnabled = true
-        }
+        self.avatarTap.isUserInteractionEnabled = true
+        UIView.animateKeyframes(withDuration: 1.0, delay: 0, options: .calculationModeCubic) {
+                       UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.50) {
+                           self.avatarViewWidthConstaint?.constant = self.view.frame.width
+                           self.avatarViewHightConstaint?.constant = self.view.frame.width
+                           self.avatarLeadingConstant?.constant = 0
+                           self.avatarTopConstant?.constant = self.view.frame.width/3
+                           self.blackView.backgroundColor = .black
+                           self.blackView.alpha = 0.7
+                           self.view.layoutIfNeeded()
+                       }
+            UIView.addKeyframe(withRelativeStartTime: 0.50, relativeDuration: 0.25) {
+                self.xButton.alpha = 1
+                self.avatarTap.layer.cornerRadius = 0
+            }
 
-        self.animateKeyframes(completion: completion)
+                   } completion: { _ in
+                   }
+        
     }
     
-    private func animateKeyframes(completion: @escaping () -> Void) {
-        let centerOrigin = self.avatarTap.center
-        self.view.layoutIfNeeded()
-
-                UIView.animateKeyframes(withDuration: 5.0, delay: 0, options: .calculationModeCubic) {
-                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.30){
-                        self.avatarTap.center = self.view.center
-                    }
-
-                    UIView.addKeyframe(withRelativeStartTime: 0.35, relativeDuration: 0.50){
-                        self.avatarTap.transform =
-                        CGAffineTransform(scaleX: self.view.frame.width / 150, y: self.view.frame.width / 150)
-                    }
-
-                    UIView.addKeyframe(withRelativeStartTime: 1, relativeDuration: 0.35){
-                        //self.avatarTap.center = self.view.center
-                        self.avatarTap.transform = .identity
-                    }
-                }
-
-            completion: { _ in
-                //self.avatarTap.transform = .identity
-                completion()
-            }
-//        self.avatarViewWidthConstaint?.constant = self.isImageViewIncreased ? 150:
-//        self.view.bounds.width
-//        self.avatarViewHightConstaint?.constant = self.isImageViewIncreased ? 150:
-//        self.view.bounds.width
+    @objc private func xButtonTouch(){
         
-//        let startPoint = self.avatarTap.frame.origin
-//
-//        UIView.animate(withDuration: 5.0, delay: 0.0, options: .curveEaseInOut) {
-//            self.avatarTap.alpha = 0.9
-//            self.avatarTap.center = self.view.center
-//            self.view.layoutIfNeeded()
-//            self.avatarTap.transform = .identity
-//            self.avatarTap.transform = self.isImageViewIncreased
-//            ? .identity
-//            : CGAffineTransform(scaleX: 2, y: 2 )
-//        } completion: { _ in
-//            self.avatarTap.center = self.avatarTap.frame.origin
-//            completion()
-//
-//        }
+            self.blackView.isHidden = true
+            self.xButton.isHidden = true
+        self.avatarTap.layer.cornerRadius = 75
+        avatarTopConstant?.constant = originalTopConstant ?? 0
+        avatarLeadingConstant?.constant = originalLeadingConstant ?? 0
+        avatarViewHightConstaint?.constant = originalViewHightConstaint ?? 0
+        avatarViewWidthConstaint?.constant = originalViewWidthConstaint ?? 0
     }
 }
 
@@ -156,10 +172,6 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        self.tableView.addSubview(avatarTap)
-        addAvatarConstraint()
-        didTapAnimationButton()
-
         if section == 0 {
             guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView else { return nil }
 
@@ -170,7 +182,7 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
         }
         
         return nil
-        
+    
     }
     
     
@@ -202,9 +214,6 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
             let photosViewController = PhotosViewController()
             photosViewController.title = title
             self.navigationController?.pushViewController(photosViewController, animated: true)}
-        didTapAnimationButton()
-        
-      
     }
     
         
