@@ -190,7 +190,7 @@ class LogInViewController: UIViewController{
             let keyboardOriginY = self.view.frame.height - keyboardHeight
 
             let yOffset = keyboardOriginY < loginButtonBottomPointY
-           
+
             ? loginButtonBottomPointY - keyboardOriginY - 270
             : 0
 
