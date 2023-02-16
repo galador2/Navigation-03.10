@@ -6,9 +6,19 @@
 //
 
 import UIKit
+import StorageService
 
 class FeedViewController: UIViewController {
+    
     var post = Post(title: "Пост")
+    public init(post: Post = Post(title: "Пост")) {
+        self.post = post
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     private lazy var button:UIButton = {
@@ -35,7 +45,7 @@ class FeedViewController: UIViewController {
     
     @objc private func buttonAction(){
         let postViewController = PostViewController()
-        postViewController.titleName = post.title
+        //postViewController.titleName = post.title
         self.navigationController?.pushViewController(postViewController, animated: true)
         
     }

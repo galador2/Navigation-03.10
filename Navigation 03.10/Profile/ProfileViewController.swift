@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.dataSource = self
@@ -83,6 +84,15 @@ class ProfileViewController: UIViewController {
 
     
    private func setupConstraint(){
+#if DEBUG
+    
+       self.tableView.backgroundColor = .systemCyan
+    
+#else
+    
+       self.tableView.backgroundColor = .systemGray4
+    
+#endif
         self.avatarViewWidthConstaint =
         avatarTap.widthAnchor.constraint(equalToConstant: 150)
         self.avatarViewHightConstaint =
@@ -131,6 +141,15 @@ class ProfileViewController: UIViewController {
         let tap = UITapGestureRecognizer(target:self, action: #selector(didTapAnimationButton))
         avatarTap.addGestureRecognizer(tap)
         
+#if DEBUG
+    func backColor(){
+        self.tableView.backgroundColor = .yellow
+    }
+#else
+    func backColor(){
+        self.tableView.backgroundColor = .green
+    }
+#endif
     }
 
 
@@ -149,6 +168,8 @@ class ProfileViewController: UIViewController {
             UIView.addKeyframe(withRelativeStartTime: 0.50, relativeDuration: 0.25) {
                 self.xButton.alpha = 1
                 self.avatarTap.layer.cornerRadius = 0
+                self.blackView.isHidden = false
+                self.xButton.isHidden = false
             }
 
                    } completion: { _ in
@@ -157,14 +178,15 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func xButtonTouch(){
-        
-            self.blackView.isHidden = true
-            self.xButton.isHidden = true
+        UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut ){
+        self.blackView.isHidden = true
+        self.xButton.isHidden = true
         self.avatarTap.layer.cornerRadius = 75
-        avatarTopConstant?.constant = originalTopConstant ?? 0
-        avatarLeadingConstant?.constant = originalLeadingConstant ?? 0
-        avatarViewHightConstaint?.constant = originalViewHightConstaint ?? 0
-        avatarViewWidthConstaint?.constant = originalViewWidthConstaint ?? 0
+            self.avatarTopConstant?.constant = self.originalTopConstant ?? 0
+            self.avatarLeadingConstant?.constant = self.originalLeadingConstant ?? 0
+            self.avatarViewHightConstaint?.constant = self.originalViewHightConstaint ?? 0
+            self.avatarViewWidthConstaint?.constant = self.originalViewWidthConstaint ?? 0
+        }
     }
 }
 
