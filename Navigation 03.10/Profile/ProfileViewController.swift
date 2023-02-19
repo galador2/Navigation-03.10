@@ -105,10 +105,10 @@ class ProfileViewController: UIViewController {
        originalViewWidthConstaint = avatarViewWidthConstaint?.constant
        originalViewHightConstaint = avatarViewHightConstaint?.constant
         
-        self.view.addSubview(tableView)
-        self.view.addSubview(blackView)
-        self.view.addSubview(avatarTap)
-        self.view.addSubview(xButton)
+        view.addSubview(tableView)
+        view.addSubview(blackView)
+        view.addSubview(avatarTap)
+        view.addSubview(xButton)
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
