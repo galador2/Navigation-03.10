@@ -86,11 +86,11 @@ class ProfileViewController: UIViewController {
    private func setupConstraint(){
 #if DEBUG
     
-       self.tableView.backgroundColor = .systemCyan
+       self.tableView.backgroundColor = .yellow
     
 #else
     
-       self.tableView.backgroundColor = .systemGray4
+       self.tableView.backgroundColor = .green
     
 #endif
         self.avatarViewWidthConstaint =
@@ -140,16 +140,6 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         let tap = UITapGestureRecognizer(target:self, action: #selector(didTapAnimationButton))
         avatarTap.addGestureRecognizer(tap)
-        
-#if DEBUG
-    func backColor(){
-        self.tableView.backgroundColor = .yellow
-    }
-#else
-    func backColor(){
-        self.tableView.backgroundColor = .green
-    }
-#endif
     }
 
 

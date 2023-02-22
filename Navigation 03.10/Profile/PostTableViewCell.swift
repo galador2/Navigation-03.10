@@ -4,10 +4,27 @@
 //
 //  Created by Kirill  Kostenko  on 06.12.2022.
 //
-
+import iOSIntPackage
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+    
+   public struct ImageProcessor{
+        public init() {}
+        
+        func processImage (inputImage: UIImage) -> UIImage {
+            let foto = CIImage(image: UIImage(named: "fourth")!)
+            let blurFilter = CIFilter(name: "CIGaussianBlur")
+            blurFilter?.setValue(foto, forKey: kCIInputImageKey)
+            blurFilter?.setValue(8, forKey: kCIInputRadiusKey)
+
+            let outputImage = blurFilter?.outputImage
+            return UIImage(ciImage: outputImage!)
+
+
+        }
+       
+    }
     
     struct PostView{
         let author:String
@@ -67,6 +84,8 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
+       
+        
     }
     
     required init?(coder: NSCoder) {
@@ -87,7 +106,19 @@ class PostTableViewCell: UITableViewCell {
         self.descriptionLabel.text = newPost.description
         self.likesLabel.text = newPost.likes
         self.viewslabel.text = newPost.views
+        let imageProcessor = ImageProcessor()
+        imageProcessor.processImage(inputImage:UIImage(named: "fourth")!)
     }
+    
+//    private func processImage(){
+//        let context = CIContext()
+//        let blurFilter = CIImage(image: UIImage(named: "third")!)
+//        let blackAndWhiteFilter = CIFilter(name: "CIColorControls")!
+//        blackAndWhiteFilter.setValue(blurFilter, forKey: "inputImage")
+//        blackAndWhiteFilter.setValue(0, forKey: kCIInputSaturationKey)
+//
+//
+//    }
     
 
    
@@ -98,6 +129,7 @@ class PostTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.descriptionLabel)
         self.contentView.addSubview(self.likesLabel)
         self.contentView.addSubview(self.viewslabel)
+        
         
         NSLayoutConstraint.activate([
             self.authorLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
