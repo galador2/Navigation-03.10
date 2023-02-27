@@ -69,6 +69,7 @@ class ProfileViewController: UIViewController {
        avatar.translatesAutoresizingMaskIntoConstraints = false
        avatar.layer.borderWidth = 3
        avatar.layer.borderColor = UIColor.white.cgColor
+       avatar.isHidden = true
        avatar.clipsToBounds = true
        return avatar
    }()
