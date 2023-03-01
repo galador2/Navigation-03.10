@@ -29,6 +29,9 @@
 		458331E82934F314002CFDFD /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331E72934F314002CFDFD /* LogInViewController.swift */; };
 		458331EE29364908002CFDFD /* extensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331ED29364908002CFDFD /* extensionUIView.swift */; };
 		458331F0293F7853002CFDFD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458331EF293F7853002CFDFD /* PostTableViewCell.swift */; };
+		45A2975929AF92E700AAFA7A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2975829AF92E700AAFA7A /* User.swift */; };
+		45A2975B29AF9A5900AAFA7A /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2975A29AF9A5900AAFA7A /* UserService.swift */; };
+		45A2975D29AFA0B800AAFA7A /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2975C29AFA0B800AAFA7A /* CurrentUserService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,9 @@
 		458331E72934F314002CFDFD /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		458331ED29364908002CFDFD /* extensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionUIView.swift; sourceTree = "<group>"; };
 		458331EF293F7853002CFDFD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		45A2975829AF92E700AAFA7A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		45A2975A29AF9A5900AAFA7A /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		45A2975C29AFA0B800AAFA7A /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +177,7 @@
 		458331E429140807002CFDFD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				45A2975729AF92A700AAFA7A /* Login */,
 				457163B728EB1EF300B5F086 /* ProfileViewController.swift */,
 				458331E5291408A8002CFDFD /* ProfileHeaderView.swift */,
 				458331E72934F314002CFDFD /* LogInViewController.swift */,
@@ -181,6 +188,16 @@
 				453E1C592986F3B800282E44 /* PhotosCollectionViewCell.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		45A2975729AF92A700AAFA7A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				45A2975829AF92E700AAFA7A /* User.swift */,
+				45A2975A29AF9A5900AAFA7A /* UserService.swift */,
+				45A2975C29AFA0B800AAFA7A /* CurrentUserService.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A2975D29AFA0B800AAFA7A /* CurrentUserService.swift in Sources */,
 				457163BA28EB7C5B00B5F086 /* PostViewController.swift in Sources */,
 				457163A628EB102400B5F086 /* ViewController.swift in Sources */,
 				458331EE29364908002CFDFD /* extensionUIView.swift in Sources */,
@@ -350,9 +368,11 @@
 				458331E6291408A8002CFDFD /* ProfileHeaderView.swift in Sources */,
 				453E1C562971535700282E44 /* CustomPhotosTableCell.swift in Sources */,
 				457163B628EB1EE000B5F086 /* FeedViewController.swift in Sources */,
+				45A2975929AF92E700AAFA7A /* User.swift in Sources */,
 				457163BE28EB8E9200B5F086 /* InfoViewController.swift in Sources */,
 				458331F0293F7853002CFDFD /* PostTableViewCell.swift in Sources */,
 				453E1C5A2986F3B800282E44 /* PhotosCollectionViewCell.swift in Sources */,
+				45A2975B29AF9A5900AAFA7A /* UserService.swift in Sources */,
 				453E1C582986B53200282E44 /* PhotosViewController.swift in Sources */,
 				458331E82934F314002CFDFD /* LogInViewController.swift in Sources */,
 				457163A428EB102400B5F086 /* SceneDelegate.swift in Sources */,

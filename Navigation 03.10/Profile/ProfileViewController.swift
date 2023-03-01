@@ -70,6 +70,7 @@ class ProfileViewController: UIViewController {
        avatar.layer.borderWidth = 3
        avatar.layer.borderColor = UIColor.white.cgColor
        avatar.clipsToBounds = true
+       avatar.isHidden = true
        return avatar
    }()
     
