@@ -9,6 +9,23 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+   public struct ImageProcessor{
+        public init() {}
+        
+        func processImage (inputImage: UIImage) -> UIImage {
+            let foto = CIImage(image: UIImage(named: "fourth")!)
+            let blurFilter = CIFilter(name: "CIGaussianBlur")
+            blurFilter?.setValue(foto, forKey: kCIInputImageKey)
+            blurFilter?.setValue(8, forKey: kCIInputRadiusKey)
+
+            let outputImage = blurFilter?.outputImage
+            return UIImage(ciImage: outputImage!)
+
+
+        }
+       
+    }
+    
     struct PostView{
         let author:String
         let image:UIImage?
@@ -67,7 +84,6 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
-        
        
         
     }
@@ -91,14 +107,22 @@ class PostTableViewCell: UITableViewCell {
         self.likesLabel.text = newPost.likes
         self.viewslabel.text = newPost.views
         let imageProcessor = ImageProcessor()
-        let processor = imageProcessor.processImage(sourceImage: newPost.image!, filter: .noir) { image in
-            self.imageLabel.image = image
-            
-            
-        }
+        imageProcessor.processImage(inputImage:UIImage(named: "fourth")!)
     }
     
+//    private func processImage(){
+//        let context = CIContext()
+//        let blurFilter = CIImage(image: UIImage(named: "third")!)
+//        let blackAndWhiteFilter = CIFilter(name: "CIColorControls")!
+//        blackAndWhiteFilter.setValue(blurFilter, forKey: "inputImage")
+//        blackAndWhiteFilter.setValue(0, forKey: kCIInputSaturationKey)
+//
+//
+//    }
+    
 
+   
+    
     private func setupView(){
         self.contentView.addSubview(self.authorLabel)
         self.contentView.addSubview(self.imageLabel)
