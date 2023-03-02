@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController{
     
+
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -100,6 +102,7 @@ class LogInViewController: UIViewController{
         setupLayout()
         viewConstrain()
         setupGestures()
+        
     }
     
     private func setupLayout(){

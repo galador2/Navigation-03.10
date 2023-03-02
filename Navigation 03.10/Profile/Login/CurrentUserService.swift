@@ -13,13 +13,17 @@ class CurrentUserService:UserService{
     
     func service<login>(_service: login.Type) -> User? {
         
-        guard let loginUser = container.loginUs(login.Type) else{
-            fatalError()
+//        guard let service = container.loginUs(login.Type.self) else{
+//            fatalError()
+//        }
+//        return container
+        if login.Type.self != nil{
+            _ = container.loginUs
         }
-        return loginUser
-        
+        return container
         
     }
+    
     
     
 }
