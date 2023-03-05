@@ -8,22 +8,16 @@
 import UIKit
 
 class CurrentUserService:UserService{
+    var user = User(loginUser: "2", fullName: "Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
     
-    private let container = User()
-    
-    func service<login>(_service: login.Type) -> User? {
-        
-//        guard let service = container.loginUs(login.Type.self) else{
-//            fatalError()
-//        }
-//        return container
-        if login.Type.self != nil{
-            _ = container.loginUs
+    func service(login: String) -> User? {
+        if login == user.loginUser{
+            return user
+        } else{
+            return nil
         }
-        return container
-        
     }
-    
+
     
     
 }

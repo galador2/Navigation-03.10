@@ -8,7 +8,6 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -33,7 +32,6 @@ class ProfileViewController: UIViewController {
     private var originalViewHightConstaint:CGFloat?
     private var originalTopConstant:CGFloat?
     private var originalLeadingConstant:CGFloat?
-
 
     
     
@@ -86,11 +84,15 @@ class ProfileViewController: UIViewController {
     
    private func setupConstraint(){
 #if DEBUG
-    
+    let login = CurrentUserService()
+       login.user = User(loginUser: "2", fullName: "Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
+       
        self.tableView.backgroundColor = .systemCyan
     
 #else
-    
+    let login = TestUserService()
+       login.user = User(loginUser: "1", fullName: "Kostenko", avatar: UIImage(named: "first"), status: "study")
+       
        self.tableView.backgroundColor = .systemGray4
     
 #endif
@@ -141,16 +143,7 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         let tap = UITapGestureRecognizer(target:self, action: #selector(didTapAnimationButton))
         avatarTap.addGestureRecognizer(tap)
-        
-#if DEBUG
-    func backColor(){
-        self.tableView.backgroundColor = .yellow
-    }
-#else
-    func backColor(){
-        self.tableView.backgroundColor = .green
-    }
-#endif
+
     }
 
 
@@ -196,9 +189,17 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
-            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView else { return nil }
+            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView  else { return nil }
 
-            let viewModel = ProfileHeaderView()
+       //     let viewModel = ProfileHeaderView()
+            let userInfomation = User(loginUser: "2", fullName: "Kirill Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
+            
+            headerView.statusLabel.text = userInfomation.status
+            headerView.fullNameLabel.text = userInfomation.fullName
+            headerView.avatarImageView.image = userInfomation.avatar
+
+            headerView.profileVC = self
+
             
             return headerView
             

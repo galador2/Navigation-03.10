@@ -8,5 +8,7 @@
 import UIKit
 
 protocol UserService{
-    func service <login>(_service:login.Type) -> User?
+    
+    func service(login:String) -> User?
 }
+

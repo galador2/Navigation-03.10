@@ -7,11 +7,12 @@
 
 import UIKit
 
-class User{
+struct User{
     
-     let loginUs:String = "galador2"
-     let fullName:String = "Kirill"
-     let avatar:UIImage? = UIImage(named: "KirKost")
-     let status:String = "busy"
+        let loginUser:String
+        let fullName:String
+        let avatar:UIImage?
+        let status:String
+
     
 }

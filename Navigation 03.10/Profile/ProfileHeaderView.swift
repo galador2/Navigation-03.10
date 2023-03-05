@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
+    weak var profileVC : ProfileViewController?
 
     let setStatusButton:UIButton = {
         let button1 = UIButton()
@@ -26,7 +27,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     }()
     
-    private let fullNameLabel:UILabel = {
+    public let fullNameLabel:UILabel = {
         let label = UILabel()
         label.text = "Kostenko Kirill"
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -35,7 +36,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return label
     }()
 
-    private let statusLabel:UILabel = {
+    public let statusLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = .gray
@@ -45,7 +46,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     }()
 
-    private let statusTextField: UITextField = {
+    public let statusTextField: UITextField = {
         let label = UITextField()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = .black
@@ -61,7 +62,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     }()
     
-    private lazy var avatarImageView: UIImageView = {
+    public lazy var avatarImageView: UIImageView = {
         var myView = UIImageView()
         let myFotoImage = UIImage(named: "KirKost")
         myView = UIImageView(image: myFotoImage)

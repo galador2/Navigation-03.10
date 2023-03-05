@@ -9,8 +9,6 @@ import UIKit
 
 class LogInViewController: UIViewController{
     
-
-    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -66,6 +64,7 @@ class LogInViewController: UIViewController{
         button.clipsToBounds = true
         button.setTitle("Log in", for: .normal)
         button.addTarget(self, action: #selector(setupButtonLogIn), for: .touchUpInside)
+        button.addTarget(self, action: #selector(setupCheck), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
@@ -181,6 +180,26 @@ class LogInViewController: UIViewController{
         let profileViewController = ProfileViewController ()
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
+    
+    @objc private func setupCheck(){
+#if DEBUG
+    let check1 = CurrentUserService()
+        if login.text == check1.user.loginUser{
+        }
+        else {fatalError()}
+    
+#else
+    let check2 = TestUserService()
+        if login.text == check2.user.loginUser{
+        }
+        else {
+            fatalError()
+        }
+
+#endif
+
+    }
+
     
     @objc private func keyboard(_ notification: Notification){
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
