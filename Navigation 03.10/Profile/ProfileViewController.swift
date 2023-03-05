@@ -84,15 +84,9 @@ class ProfileViewController: UIViewController {
     
    private func setupConstraint(){
 #if DEBUG
-    let login = CurrentUserService()
-       login.user = User(loginUser: "2", fullName: "Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
-       
        self.tableView.backgroundColor = .systemCyan
     
 #else
-    let login = TestUserService()
-       login.user = User(loginUser: "1", fullName: "Kostenko", avatar: UIImage(named: "first"), status: "study")
-       
        self.tableView.backgroundColor = .systemGray4
     
 #endif
@@ -191,7 +185,7 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView  else { return nil }
 
-       //     let viewModel = ProfileHeaderView()
+    
             let userInfomation = User(loginUser: "2", fullName: "Kirill Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
             
             headerView.statusLabel.text = userInfomation.status
