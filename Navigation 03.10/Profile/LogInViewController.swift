@@ -194,13 +194,20 @@ class LogInViewController: UIViewController{
         
         let check = CurrentUserService()
         let checkTwo = TestUserService()
+        let header = ProfileHeaderView()
             if login.text == check.user.loginUser{
                 let profileViewController = ProfileViewController ()
                 self.navigationController?.pushViewController(profileViewController, animated: true)
+                header.statusLabel.text = check.user.status
+                header.fullNameLabel.text = check.user.fullName
+                header.avatarImageView.image = check.user.avatar
             }
         else if login.text == checkTwo.user.loginUser{
             let profileViewController = ProfileViewController ()
             self.navigationController?.pushViewController(profileViewController, animated: true)
+            header.statusLabel.text = checkTwo.user.status
+            header.fullNameLabel.text = checkTwo.user.fullName
+            header.avatarImageView.image = checkTwo.user.avatar
         }
             else {
                 self.dismiss(animated: true)
