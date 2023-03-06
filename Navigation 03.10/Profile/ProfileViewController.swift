@@ -84,6 +84,7 @@ class ProfileViewController: UIViewController {
     
    private func setupConstraint(){
 #if DEBUG
+       
        self.tableView.backgroundColor = .systemCyan
     
 #else
@@ -184,18 +185,33 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView  else { return nil }
-
-    
-            let userInfomation = User(loginUser: "2", fullName: "Kirill Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
             
-            headerView.statusLabel.text = userInfomation.status
-            headerView.fullNameLabel.text = userInfomation.fullName
-            headerView.avatarImageView.image = userInfomation.avatar
+            #if DEBUG
+            let currentUserService = CurrentUserService()
+            currentUserService.user = User(loginUser: "2", fullName: "Kirill Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
+            
+            headerView.statusLabel.text = currentUserService.user.status
+            headerView.fullNameLabel.text = currentUserService.user.fullName
+            headerView.avatarImageView.image = currentUserService.user.avatar
 
             headerView.profileVC = self
 
             
             return headerView
+            
+            #else
+            
+            let testUserService = TestUserService()
+            testUserService.user = User(loginUser: "1", fullName: "Kostenko", avatar: UIImage(named: "first"), status: "study")
+            headerView.statusLabel.text = testUserService.user.status
+            headerView.fullNameLabel.text = testUserService.user.fullName
+            headerView.avatarImageView.image = testUserService.user.avatar
+            
+            headerView.profileVC = self
+            
+            return headerView
+            
+            #endif
             
         }
         

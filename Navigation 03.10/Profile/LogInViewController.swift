@@ -63,7 +63,6 @@ class LogInViewController: UIViewController{
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.setTitle("Log in", for: .normal)
-        button.addTarget(self, action: #selector(setupButtonLogIn), for: .touchUpInside)
         button.addTarget(self, action: #selector(setupCheck), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -81,6 +80,16 @@ class LogInViewController: UIViewController{
         return pictureVK
         
     }()
+    
+    private lazy var mistakeEnterLogin:UILabel = {
+        var label = UILabel()
+        label.text = "Wrong login"
+        label.textColor = .red
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private var log: String?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +120,7 @@ class LogInViewController: UIViewController{
         self.stackView.addArrangedSubview(password)
         self.view.addSubview(button)
         self.view.addSubview(pictureVK)
+        self.view.addSubview(mistakeEnterLogin)
     }
     
     private func setupGestures(){
@@ -166,7 +176,10 @@ class LogInViewController: UIViewController{
             self.button.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
             self.button.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
             self.button.heightAnchor.constraint(equalToConstant: 50),
-            self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
+            self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
+            
+            self.mistakeEnterLogin.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            self.mistakeEnterLogin.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor)
 
         ])
     }
@@ -175,28 +188,25 @@ class LogInViewController: UIViewController{
         login.text = ""
         password.text = ""
     }
-    
-    @objc private func setupButtonLogIn(){
-        let profileViewController = ProfileViewController ()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
-    }
+
     
     @objc private func setupCheck(){
-#if DEBUG
-    let check1 = CurrentUserService()
-        if login.text == check1.user.loginUser{
+        
+        let check = CurrentUserService()
+        let checkTwo = TestUserService()
+            if login.text == check.user.loginUser{
+                let profileViewController = ProfileViewController ()
+                self.navigationController?.pushViewController(profileViewController, animated: true)
+            }
+        else if login.text == checkTwo.user.loginUser{
+            let profileViewController = ProfileViewController ()
+            self.navigationController?.pushViewController(profileViewController, animated: true)
         }
-        else {fatalError()}
-    
-#else
-    let check2 = TestUserService()
-        if login.text == check2.user.loginUser{
-        }
-        else {
-            fatalError()
-        }
+            else {
+                self.dismiss(animated: true)
+                mistakeEnterLogin.isHidden = false
+            }
 
-#endif
 
     }
 
