@@ -31,8 +31,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = tapBarController
         window.makeKeyAndVisible()
         self.window = window
+        let loginIspector = LogInViewController().loginDelegate
+        let inspector = loginIspector as? LoginInspector
         
-    
     }
     
 

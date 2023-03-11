@@ -9,6 +9,6 @@ import UIKit
 
 protocol UserService{
     
-    func service(login:String) -> User?
+    func service(login:String, password:String) -> Bool?
 }
 

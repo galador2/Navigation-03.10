@@ -11,14 +11,15 @@ class TestUserService:UserService{
     
     var user = User(loginUser: "1", fullName: "Kostenko", avatar: UIImage(named: "first"), status: "study")
     
-    func service(login: String) -> User? {
+    func service(login: String, password: String) -> Bool? {
         if login == user.loginUser{
-            return user
+            return true
         } else {
-            return nil
+            return false
         }
     }
-    
-    
-    
-}
+    }
+
+
+
+

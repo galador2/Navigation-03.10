@@ -10,6 +10,7 @@ import UIKit
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
     weak var profileVC : ProfileViewController?
+    
 
     let setStatusButton:UIButton = {
         let button1 = UIButton()

@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController{
     
+    var loginDelegate:LoginViewControllerDelegate?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +31,7 @@ class LogInViewController: UIViewController{
         
     }()
     
-     private lazy var login:UITextField = {
+     public lazy var login:UITextField = {
         let login = UITextField()
         login.borderStyle = .roundedRect
         login.placeholder = "Email or phone"
@@ -191,24 +193,18 @@ class LogInViewController: UIViewController{
 
     
     @objc private func setupCheck(){
-        
+
+        #if DEBUG
         let check = CurrentUserService()
-        let checkTwo = TestUserService()
-        let header = ProfileHeaderView()
+        #else
+        let check = TestUserService()
+        #endif
+
             if login.text == check.user.loginUser{
                 let profileViewController = ProfileViewController ()
                 self.navigationController?.pushViewController(profileViewController, animated: true)
-                header.statusLabel.text = check.user.status
-                header.fullNameLabel.text = check.user.fullName
-                header.avatarImageView.image = check.user.avatar
+         
             }
-        else if login.text == checkTwo.user.loginUser{
-            let profileViewController = ProfileViewController ()
-            self.navigationController?.pushViewController(profileViewController, animated: true)
-            header.statusLabel.text = checkTwo.user.status
-            header.fullNameLabel.text = checkTwo.user.fullName
-            header.avatarImageView.image = checkTwo.user.avatar
-        }
             else {
                 self.dismiss(animated: true)
                 mistakeEnterLogin.isHidden = false

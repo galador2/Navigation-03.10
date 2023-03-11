@@ -10,14 +10,22 @@ import UIKit
 class CurrentUserService:UserService{
     var user = User(loginUser: "2", fullName: "Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
     
-    func service(login: String) -> User? {
-        if login == user.loginUser{
-            return user
-        } else{
-            return nil
+    func service(login: String, password: String) -> Bool? {
+        if login == login{
+           
+            return true
         }
+        else if password == password{
+            
+            return true
+        }
+
+        else{
+            return false
+        }
+    }
     }
 
     
     
-}
+

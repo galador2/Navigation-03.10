@@ -33,6 +33,9 @@
 		45A2975B29AF9A5900AAFA7A /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2975A29AF9A5900AAFA7A /* UserService.swift */; };
 		45A2975D29AFA0B800AAFA7A /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2975C29AFA0B800AAFA7A /* CurrentUserService.swift */; };
 		45A2975F29B4D03400AAFA7A /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2975E29B4D03400AAFA7A /* TestUserService.swift */; };
+		45A2976229B7391100AAFA7A /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976129B7391100AAFA7A /* Checker.swift */; };
+		45A2976429B73C5300AAFA7A /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976329B73C5300AAFA7A /* LoginViewControllerDelegate.swift */; };
+		45A2976629B7452100AAFA7A /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976529B7452000AAFA7A /* LoginInspector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +104,9 @@
 		45A2975A29AF9A5900AAFA7A /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		45A2975C29AFA0B800AAFA7A /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		45A2975E29B4D03400AAFA7A /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		45A2976129B7391100AAFA7A /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		45A2976329B73C5300AAFA7A /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
+		45A2976529B7452000AAFA7A /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,7 @@
 				457163A328EB102400B5F086 /* SceneDelegate.swift */,
 				457163A528EB102400B5F086 /* ViewController.swift */,
 				457163B528EB1EE000B5F086 /* FeedViewController.swift */,
+				45A2976029B738EC00AAFA7A /* Checker */,
 				458331E429140807002CFDFD /* Profile */,
 				457163B928EB7C5B00B5F086 /* PostViewController.swift */,
 				457163BB28EB89C500B5F086 /* Post.swift */,
@@ -201,6 +208,16 @@
 				45A2975E29B4D03400AAFA7A /* TestUserService.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		45A2976029B738EC00AAFA7A /* Checker */ = {
+			isa = PBXGroup;
+			children = (
+				45A2976129B7391100AAFA7A /* Checker.swift */,
+				45A2976329B73C5300AAFA7A /* LoginViewControllerDelegate.swift */,
+				45A2976529B7452000AAFA7A /* LoginInspector.swift */,
+			);
+			path = Checker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,7 +379,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A2976629B7452100AAFA7A /* LoginInspector.swift in Sources */,
 				45A2975D29AFA0B800AAFA7A /* CurrentUserService.swift in Sources */,
+				45A2976429B73C5300AAFA7A /* LoginViewControllerDelegate.swift in Sources */,
+				45A2976229B7391100AAFA7A /* Checker.swift in Sources */,
 				457163BA28EB7C5B00B5F086 /* PostViewController.swift in Sources */,
 				457163A628EB102400B5F086 /* ViewController.swift in Sources */,
 				458331EE29364908002CFDFD /* extensionUIView.swift in Sources */,
@@ -693,7 +713,7 @@
 				453E1CDB299D088300282E44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		453E1CDF299D088300282E44 /* Build configuration list for PBXNativeTarget "StorageServiceTests" */ = {
 			isa = XCConfigurationList;
@@ -702,7 +722,7 @@
 				453E1CDD299D088300282E44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		4571639928EB102400B5F086 /* Build configuration list for PBXProject "Navigation 03.10" */ = {
 			isa = XCConfigurationList;
@@ -711,7 +731,7 @@
 				457163B128EB102400B5F086 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		457163B228EB102400B5F086 /* Build configuration list for PBXNativeTarget "Navigation 03.10" */ = {
 			isa = XCConfigurationList;
@@ -720,7 +740,7 @@
 				457163B428EB102400B5F086 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
