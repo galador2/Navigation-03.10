@@ -8,11 +8,10 @@
 import UIKit
 
 class TestUserService:UserService{
-    
-    var user = User(loginUser: "1", fullName: "Kostenko", avatar: UIImage(named: "first"), status: "study")
+    var user = User(login: "7", fullName: "Kostenko", avatar: UIImage(named: "first"), status: "study")
     
     func service(login: String, password: String) -> Bool? {
-        if login == user.loginUser{
+        if login == user.login{
             return true
         } else {
             return false

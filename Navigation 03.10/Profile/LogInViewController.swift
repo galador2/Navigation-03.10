@@ -65,7 +65,7 @@ class LogInViewController: UIViewController{
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.setTitle("Log in", for: .normal)
-        button.addTarget(self, action: #selector(setupCheck), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.setupCheck), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
@@ -194,22 +194,21 @@ class LogInViewController: UIViewController{
     
     @objc private func setupCheck(){
 
-        #if DEBUG
-        let check = CurrentUserService()
-        #else
-        let check = TestUserService()
-        #endif
-
-            if login.text == check.user.loginUser{
-                let profileViewController = ProfileViewController ()
-                self.navigationController?.pushViewController(profileViewController, animated: true)
-         
-            }
-            else {
-                self.dismiss(animated: true)
-                mistakeEnterLogin.isHidden = false
-            }
-
+        let login = self.login.text ?? ""
+        let password = self.password.text ?? ""
+        print("login \(login)  pswd \(password)")
+        let checklLogin = loginDelegate?.check(login: login, password: password) ?? false
+        
+        if checklLogin{
+            print(true)
+            let user = User(login: "1", fullName: "JJJJ", avatar: UIImage(named: "foto3"), status: "GGGG")
+            let profileViewController = ProfileViewController (user: user)
+            navigationController?.setViewControllers([profileViewController], animated: true)
+        } else {
+            let alert = UIAlertController(title: "Unknown", message: "Please, enter correct user login", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            self.present(alert, animated: true)
+        }
 
     }
 

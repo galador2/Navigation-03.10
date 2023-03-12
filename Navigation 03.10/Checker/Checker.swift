@@ -9,24 +9,22 @@ import UIKit
 
 class Checker{
     
-    static let shared = Checker()
-    private init(){
-        login = "777"
-        password = "777"
-        
-    }
-    let login:String
-    let password:String
+    static var shared = Checker()
+    #if DEBUG
+      private var login = "1"
+      private var  password = "1"
+    #else
+    private var login = "1"
+    private var  password = "1"
+    
+    #endif
+    private init(){}
     
      func check(login:String, password:String) -> Bool{
-        if login == login{
-            return true
-        }
-        else if password == password{
-            return true
-        }
-        else{
-            return false
-        }
+         if login == self.login && password == self.password {
+             return true
+         }
+         return false
     }
 }
+

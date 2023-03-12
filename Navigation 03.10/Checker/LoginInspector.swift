@@ -11,9 +11,20 @@ struct LoginInspector: LoginViewControllerDelegate{
     func check(login: String, password: String)->Bool {
         let checker = Checker.shared
         print("CHECK")
-        return check(login: login, password: password)
+        return checker.check(login: login, password: password)
     }
     
+}
+
+protocol LoginFactory {
+    func makeLoginInspector ()  -> LoginInspector
+}
+
+struct MyLoginFactory: LoginFactory {
+    func makeLoginInspector ()  -> LoginInspector {
+        print ("Создан LoginInspector")
+        return LoginInspector()
+    }
 }
     
 

@@ -8,7 +8,7 @@
 import UIKit
 
 class CurrentUserService:UserService{
-    var user = User(loginUser: "2", fullName: "Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
+    var user = User(login: "7", fullName: "Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
     
     func service(login: String, password: String) -> Bool? {
         if login == login{
