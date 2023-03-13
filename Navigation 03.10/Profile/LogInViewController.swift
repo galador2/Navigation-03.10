@@ -205,12 +205,12 @@ class LogInViewController: UIViewController{
             let profileViewController = ProfileViewController (user: user)
             navigationController?.setViewControllers([profileViewController], animated: true)
         } else {
-            let user = User(login: "1", fullName: "КИРА", avatar: UIImage(named: "foto3"), status: "учусь")
-            let profileViewController = ProfileViewController (user: user)
-            navigationController?.setViewControllers([profileViewController], animated: true)
-//            let alert = UIAlertController(title: "Unknown", message: "Please, enter correct user login", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-//            self.present(alert, animated: true)
+//            let user = User(login: "1", fullName: "КИРА", avatar: UIImage(named: "foto3"), status: "учусь")
+//            let profileViewController = ProfileViewController (user: user)
+//            navigationController?.setViewControllers([profileViewController], animated: true)
+            let alert = UIAlertController(title: "Unknown", message: "Please, enter correct user login", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            self.present(alert, animated: true)
         }
 
     }

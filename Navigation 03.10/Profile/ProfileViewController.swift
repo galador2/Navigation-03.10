@@ -88,6 +88,8 @@ class ProfileViewController: UIViewController {
         var xButton = UIButton()
         xButton.setImage(UIImage(named: "X"), for: .normal)
         xButton.alpha = 0
+        xButton.contentHorizontalAlignment = .fill
+        xButton.contentVerticalAlignment = .fill
         xButton.addTarget(self, action: #selector(xButtonTouch), for: .touchUpInside)
         xButton.translatesAutoresizingMaskIntoConstraints = false
         return xButton
@@ -179,16 +181,24 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func xButtonTouch(){
-        UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut ){
-        self.blackView.isHidden = true
-        self.xButton.isHidden = true
-        self.avatarTap.layer.cornerRadius = 75
+ //       UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut ){
+//        self.blackView.isHidden = true
+//        self.xButton.isHidden = true
+//        self.avatarTap.layer.cornerRadius = 75
             self.avatarTopConstant?.constant = self.originalTopConstant ?? 0
             self.avatarLeadingConstant?.constant = self.originalLeadingConstant ?? 0
             self.avatarViewHightConstaint?.constant = self.originalViewHightConstaint ?? 0
             self.avatarViewWidthConstaint?.constant = self.originalViewWidthConstaint ?? 0
             self.avatarTap.isHidden = true
+ //       }
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+            self.blackView.alpha = 0
+            self.xButton.alpha = 0
+            self.avatarTap.layer.cornerRadius = 75
+            self.avatarTap.alpha = 0
+            self.view.layoutSubviews()
         }
+            
     }
 }
 
