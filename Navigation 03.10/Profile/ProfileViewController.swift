@@ -80,7 +80,7 @@ class ProfileViewController: UIViewController {
        avatar.layer.borderWidth = 3
        avatar.layer.borderColor = UIColor.white.cgColor
        avatar.clipsToBounds = true
-       //avatar.isHidden = true
+        avatar.alpha = 0.1
        return avatar
    }()
     
@@ -169,6 +169,7 @@ class ProfileViewController: UIViewController {
                            self.view.layoutIfNeeded()
                        }
             UIView.addKeyframe(withRelativeStartTime: 0.50, relativeDuration: 0.25) {
+                self.avatarTap.alpha = 1
                 self.xButton.alpha = 1
                 self.avatarTap.layer.cornerRadius = 0
                 self.blackView.isHidden = false
@@ -181,16 +182,11 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func xButtonTouch(){
- //       UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut ){
-//        self.blackView.isHidden = true
-//        self.xButton.isHidden = true
-//        self.avatarTap.layer.cornerRadius = 75
             self.avatarTopConstant?.constant = self.originalTopConstant ?? 0
             self.avatarLeadingConstant?.constant = self.originalLeadingConstant ?? 0
             self.avatarViewHightConstaint?.constant = self.originalViewHightConstaint ?? 0
             self.avatarViewWidthConstaint?.constant = self.originalViewWidthConstaint ?? 0
             self.avatarTap.isHidden = true
- //       }
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
             self.blackView.alpha = 0
             self.xButton.alpha = 0

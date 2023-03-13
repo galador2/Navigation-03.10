@@ -36,6 +36,8 @@
 		45A2976229B7391100AAFA7A /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976129B7391100AAFA7A /* Checker.swift */; };
 		45A2976429B73C5300AAFA7A /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976329B73C5300AAFA7A /* LoginViewControllerDelegate.swift */; };
 		45A2976629B7452100AAFA7A /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976529B7452000AAFA7A /* LoginInspector.swift */; };
+		45A2976829BF42BD00AAFA7A /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976729BF42BD00AAFA7A /* LoginFactory.swift */; };
+		45A2976A29BF42D100AAFA7A /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976929BF42D100AAFA7A /* MyLoginFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		45A2976129B7391100AAFA7A /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		45A2976329B73C5300AAFA7A /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		45A2976529B7452000AAFA7A /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		45A2976729BF42BD00AAFA7A /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		45A2976929BF42D100AAFA7A /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +220,8 @@
 				45A2976129B7391100AAFA7A /* Checker.swift */,
 				45A2976329B73C5300AAFA7A /* LoginViewControllerDelegate.swift */,
 				45A2976529B7452000AAFA7A /* LoginInspector.swift */,
+				45A2976729BF42BD00AAFA7A /* LoginFactory.swift */,
+				45A2976929BF42D100AAFA7A /* MyLoginFactory.swift */,
 			);
 			path = Checker;
 			sourceTree = "<group>";
@@ -393,8 +399,10 @@
 				45A2975F29B4D03400AAFA7A /* TestUserService.swift in Sources */,
 				457163B628EB1EE000B5F086 /* FeedViewController.swift in Sources */,
 				45A2975929AF92E700AAFA7A /* User.swift in Sources */,
+				45A2976829BF42BD00AAFA7A /* LoginFactory.swift in Sources */,
 				457163BE28EB8E9200B5F086 /* InfoViewController.swift in Sources */,
 				458331F0293F7853002CFDFD /* PostTableViewCell.swift in Sources */,
+				45A2976A29BF42D100AAFA7A /* MyLoginFactory.swift in Sources */,
 				453E1C5A2986F3B800282E44 /* PhotosCollectionViewCell.swift in Sources */,
 				45A2975B29AF9A5900AAFA7A /* UserService.swift in Sources */,
 				453E1C582986B53200282E44 /* PhotosViewController.swift in Sources */,

@@ -7,15 +7,15 @@
 
 import UIKit
 
-class Checker{
+final class Checker{
     
     static var shared = Checker()
     #if DEBUG
       private var login = "1"
       private var  password = "1"
     #else
-    private var login = "1"
-    private var  password = "1"
+    private var login = "2"
+    private var  password = "2"
     
     #endif
     private init(){}

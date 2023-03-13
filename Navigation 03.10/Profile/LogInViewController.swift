@@ -197,17 +197,15 @@ class LogInViewController: UIViewController{
         let login = self.login.text ?? ""
         let password = self.password.text ?? ""
         print("login \(login)  pswd \(password)")
-        let checklLogin = loginDelegate?.check(login: login, password: password) ?? false
+        //let checkLogin = loginDelegate?.check(login: login, password: password) ?? false
+        let checkLogin = MyLoginFactory().makeLoginInspector().check(login: login, password: password)
         
-        if checklLogin{
+        if checkLogin{
             print(true)
-            let user = User(login: "1", fullName: "JJJJ", avatar: UIImage(named: "foto3"), status: "GGGG")
+            let user = User(login: "1", fullName: "Kirill Kirill", avatar: UIImage(named: "foto3"), status: "busy")
             let profileViewController = ProfileViewController (user: user)
             navigationController?.setViewControllers([profileViewController], animated: true)
         } else {
-//            let user = User(login: "1", fullName: "КИРА", avatar: UIImage(named: "foto3"), status: "учусь")
-//            let profileViewController = ProfileViewController (user: user)
-//            navigationController?.setViewControllers([profileViewController], animated: true)
             let alert = UIAlertController(title: "Unknown", message: "Please, enter correct user login", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             self.present(alert, animated: true)
@@ -262,10 +260,10 @@ extension LogInViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-//        print(" \(textField.text)")
-//        if textField.tag == 0 {
-//            self.log = textField.text
-//        }
+        print(" \(textField.text)")
+        if textField.tag == 0 {
+            self.log = textField.text
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -19,12 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let tapBarController = UITabBarController()
-        firstTapBarController = UINavigationController.init(rootViewController: FeedViewController())
-        secondTapBarController = UINavigationController.init(rootViewController: LogInViewController())
         let loginVC = LogInViewController()
+        firstTapBarController = UINavigationController.init(rootViewController: FeedViewController())
+        secondTapBarController = UINavigationController.init(rootViewController: loginVC)
         let loginIspector = LoginInspector()
         loginVC.loginDelegate = loginIspector
-        //let loginController = UINavigationController(rootViewController: loginVC)
+        //let myInspector = MyLoginFactory().makeLoginInspector()
         tapBarController.viewControllers = [firstTapBarController,secondTapBarController]
         let item1 = UITabBarItem(title: "Лента", image: UIImage(systemName: "doc"), tag: 0)
         let item2 = UITabBarItem(title: "Профиль", image: UIImage(systemName: "paperplane"), tag: 1)
@@ -33,11 +33,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().backgroundColor = .lightText
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-//        let loginVC = LogInViewController()
-//        let loginIspector = LoginInspector()
-//        loginVC.loginDelegate = loginIspector
-//        let loginController = UINavigationController(rootViewController: loginVC)
-//        let inspector = loginVC as? LoginInspector
         window.rootViewController = tapBarController
         window.makeKeyAndVisible()
     }
