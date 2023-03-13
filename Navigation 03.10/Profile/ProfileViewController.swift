@@ -80,7 +80,7 @@ class ProfileViewController: UIViewController {
        avatar.layer.borderWidth = 3
        avatar.layer.borderColor = UIColor.white.cgColor
        avatar.clipsToBounds = true
-       avatar.isHidden = true
+       //avatar.isHidden = true
        return avatar
    }()
     
@@ -187,6 +187,7 @@ class ProfileViewController: UIViewController {
             self.avatarLeadingConstant?.constant = self.originalLeadingConstant ?? 0
             self.avatarViewHightConstaint?.constant = self.originalViewHightConstaint ?? 0
             self.avatarViewWidthConstaint?.constant = self.originalViewWidthConstaint ?? 0
+            self.avatarTap.isHidden = true
         }
     }
 }
@@ -197,33 +198,10 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView  else { return nil }
-//
-//            #if DEBUG
-//            let currentUserService = CurrentUserService()
-//            currentUserService.user = User(loginUser: "2", fullName: "Kirill Kirill", avatar: UIImage(named: "KirKost"), status: "busy")
-//
-//            headerView.statusLabel.text = currentUserService.user.status
-//            headerView.fullNameLabel.text = currentUserService.user.fullName
-//            headerView.avatarImageView.image = currentUserService.user.avatar
-//            headerView.profileVC = self
-//
-//
+            headerView.profileVC = self
+            headerView.setup(user: user)
             return headerView
-//
-//            #else
-//
-//            let testUserService = TestUserService()
-//            testUserService.user = User(loginUser: "1", fullName: "Kostenko", avatar: UIImage(named: "first"), status: "study")
-//            headerView.statusLabel.text = testUserService.user.status
-//            headerView.fullNameLabel.text = testUserService.user.fullName
-//            headerView.avatarImageView.image = testUserService.user.avatar
-//
-//            headerView.profileVC = self
-//
-//            return headerView
-//
-//            #endif
-//
+
         }
         
         return nil

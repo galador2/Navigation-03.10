@@ -24,7 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let loginVC = LogInViewController()
         let loginIspector = LoginInspector()
         loginVC.loginDelegate = loginIspector
-       // loginVC.loginDelegate = loginIspector
         //let loginController = UINavigationController(rootViewController: loginVC)
         tapBarController.viewControllers = [firstTapBarController,secondTapBarController]
         let item1 = UITabBarItem(title: "Лента", image: UIImage(systemName: "doc"), tag: 0)

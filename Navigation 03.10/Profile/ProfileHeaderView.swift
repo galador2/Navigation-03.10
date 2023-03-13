@@ -91,6 +91,12 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
            fatalError("init(coder:) has not been implemented")
        }
     
+    func setup (user: User) {
+        avatarImageView.image = user.avatar
+       fullNameLabel.text = user.fullName
+       statusLabel.text = user.status
+   }
+    
     
     
     func setupConstrait(){
