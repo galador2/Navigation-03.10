@@ -11,11 +11,11 @@ final class Checker{
     
     static var shared = Checker()
     #if DEBUG
-      private var login = "1"
-      private var  password = "1"
+      private var login = ""
+      private var  password = ""
     #else
-    private var login = "2"
-    private var  password = "2"
+    private var login = ""
+    private var  password = ""
     
     #endif
     private init(){}

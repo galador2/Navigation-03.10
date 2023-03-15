@@ -6,8 +6,35 @@
 //
 
 import UIKit
+import iOSIntPackage
 
-class PhotosViewController: UIViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
+class PhotosViewController: UIViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate, ImageLibrarySubscriber {
+    
+    let publisher = ImagePublisherFacade()
+    private var images:[UIImage] = []
+    private var subscription: [PhotosCollectionViewCell.PhotoGallery] = []
+//
+//    public func subscribe(_ subscriber: PhotosCollectionViewCell.PhotoGallery){
+//        publisher.subscribe(subscription.append(subscriber) as! ImageLibrarySubscriber)
+//        print("slegu")
+//        notifySubscribers()
+//
+//    }
+//
+//    private func notifySubscribers() {
+//        subscription.forEach {_ in
+//           receive(images: images)
+//        }
+//    }
+//
+//    public func subscribe (_ image:PhotosCollectionViewCell.PhotoGallery){
+//        publisher.subscribe(PhotosCollectionViewCell.PhotoGallery(photo: UIImage()) as! ImageLibrarySubscriber)
+//        publisher.subscribe(subscription.append(PhotosCollectionViewCell.PhotoGallery(photo: UIImage())) as! ImageLibrarySubscriber)
+//        print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+//
+//    }
+    
+    
     
     private enum Contants{
         static let numberOfItemsInLine: CGFloat = 3
@@ -32,23 +59,17 @@ class PhotosViewController: UIViewController, UINavigationBarDelegate, UIGesture
         return collectionView
     }()
     
-    private let fotoCollection: [PhotosCollectionViewCell.PhotoGallery] = [
+    private var fotoCollection: [PhotosCollectionViewCell.PhotoGallery] = [
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto1")),
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto2")),
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto3")),
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto4")),
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto1")),
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto2")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto3")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto4")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto1")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto2")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto3")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto4")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto1")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto2")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto3")),
-        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto4"))
+       
+       
+   
+    
     ]
     
     override func viewDidLoad(){
@@ -117,6 +138,39 @@ extension PhotosViewController:UICollectionViewDataSource, UICollectionViewDeleg
     
     }
     
+extension PhotosViewController{
+    func receive(images: [UIImage]) {
+        print("kjbkkjbhkbjkbkjbjkbnkjbnlkjbnjklbkjbn \(images)")
+    }
     
+        public func subscribe(_ subscriber: PhotosCollectionViewCell.PhotoGallery){
+            guard subscription.contains(where: {_ in
+                receive(images: images)
+                return true
+            })else {
+                return
+            }
+            publisher.subscribe(subscription.append(subscriber) as! ImageLibrarySubscriber)
+            print("ADD")
+           // notifySubscribers()
+    
+        }
+    func removeSubscriber(_ subscriber: PhotosCollectionViewCell.PhotoGallery) {
+        subscription = subscription.filter { _ in _ = subscriber.photo?.images
+            return true }
+        print("DELETE")
+        
+    }
+    
+        private func notifySubscribers() {
+            subscription.forEach {_ in
+               receive(images: images)
+            }
+        }
+    
+
+}
+
+
     
 

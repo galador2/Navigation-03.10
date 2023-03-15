@@ -38,6 +38,7 @@
 		45A2976629B7452100AAFA7A /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976529B7452000AAFA7A /* LoginInspector.swift */; };
 		45A2976829BF42BD00AAFA7A /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976729BF42BD00AAFA7A /* LoginFactory.swift */; };
 		45A2976A29BF42D100AAFA7A /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976929BF42D100AAFA7A /* MyLoginFactory.swift */; };
+		45A2977129C0563F00AAFA7A /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 45A2977029C0563F00AAFA7A /* iOSIntPackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				453E1CD7299D088300282E44 /* StorageService.framework in Frameworks */,
+				45A2977129C0563F00AAFA7A /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,9 +179,11 @@
 				457163B528EB1EE000B5F086 /* FeedViewController.swift */,
 				45A2976029B738EC00AAFA7A /* Checker */,
 				458331E429140807002CFDFD /* Profile */,
-				457163B928EB7C5B00B5F086 /* PostViewController.swift */,
+				45A2975729AF92A700AAFA7A /* Login */,
 				457163BB28EB89C500B5F086 /* Post.swift */,
+				457163B928EB7C5B00B5F086 /* PostViewController.swift */,
 				457163BD28EB8E9200B5F086 /* InfoViewController.swift */,
+				45A2976B29C04F3B00AAFA7A /* Photo */,
 				457163AA28EB102400B5F086 /* Assets.xcassets */,
 				457163AC28EB102400B5F086 /* LaunchScreen.storyboard */,
 				457163AF28EB102400B5F086 /* Info.plist */,
@@ -190,15 +194,11 @@
 		458331E429140807002CFDFD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				45A2975729AF92A700AAFA7A /* Login */,
 				457163B728EB1EF300B5F086 /* ProfileViewController.swift */,
 				458331E5291408A8002CFDFD /* ProfileHeaderView.swift */,
 				458331E72934F314002CFDFD /* LogInViewController.swift */,
 				458331ED29364908002CFDFD /* extensionUIView.swift */,
 				458331EF293F7853002CFDFD /* PostTableViewCell.swift */,
-				453E1C552971535700282E44 /* CustomPhotosTableCell.swift */,
-				453E1C572986B53200282E44 /* PhotosViewController.swift */,
-				453E1C592986F3B800282E44 /* PhotosCollectionViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -224,6 +224,16 @@
 				45A2976929BF42D100AAFA7A /* MyLoginFactory.swift */,
 			);
 			path = Checker;
+			sourceTree = "<group>";
+		};
+		45A2976B29C04F3B00AAFA7A /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				453E1C552971535700282E44 /* CustomPhotosTableCell.swift */,
+				453E1C572986B53200282E44 /* PhotosViewController.swift */,
+				453E1C592986F3B800282E44 /* PhotosCollectionViewCell.swift */,
+			);
+			path = Photo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +302,9 @@
 				453E1CD6299D088300282E44 /* PBXTargetDependency */,
 			);
 			name = "Navigation 03.10";
+			packageProductDependencies = (
+				45A2977029C0563F00AAFA7A /* iOSIntPackage */,
+			);
 			productName = "Navigation 03.10";
 			productReference = 4571639E28EB102400B5F086 /* Navigation 03.10.app */;
 			productType = "com.apple.product-type.application";
@@ -327,6 +340,9 @@
 				Base,
 			);
 			mainGroup = 4571639528EB102400B5F086;
+			packageReferences = (
+				45A2976F29C0563F00AAFA7A /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = 4571639F28EB102400B5F086 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -751,6 +767,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		45A2976F29C0563F00AAFA7A /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
+			requirement = {
+				branch = imagepublisher;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		45A2977029C0563F00AAFA7A /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45A2976F29C0563F00AAFA7A /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4571639628EB102400B5F086 /* Project object */;
 }
