@@ -11,28 +11,32 @@ import iOSIntPackage
 class PhotosViewController: UIViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate, ImageLibrarySubscriber {
     
     let publisher = ImagePublisherFacade()
-    private var images:[UIImage] = []
+    private var userImages:[UIImage] = [UIImage]()
     private var subscription: [PhotosCollectionViewCell.PhotoGallery] = []
-//
-//    public func subscribe(_ subscriber: PhotosCollectionViewCell.PhotoGallery){
-//        publisher.subscribe(subscription.append(subscriber) as! ImageLibrarySubscriber)
-//        print("slegu")
-//        notifySubscribers()
-//
-//    }
-//
-//    private func notifySubscribers() {
-//        subscription.forEach {_ in
-//           receive(images: images)
-//        }
-//    }
-//
-//    public func subscribe (_ image:PhotosCollectionViewCell.PhotoGallery){
-//        publisher.subscribe(PhotosCollectionViewCell.PhotoGallery(photo: UIImage()) as! ImageLibrarySubscriber)
-//        publisher.subscribe(subscription.append(PhotosCollectionViewCell.PhotoGallery(photo: UIImage())) as! ImageLibrarySubscriber)
-//        print("!!!!!!!!!!!!!!!!!!!!!!!!!")
-//
-//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.publisher.subscribe(self)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        self.publisher.removeSubscription(for: self)
+    }
+
+    public func subscribe(_ subscriber: PhotosCollectionViewCell.PhotoGallery){
+        publisher.subscribe(subscription.append(subscriber) as! ImageLibrarySubscriber)
+    }
+    
+    public func removeSubscription(for subscriber: PhotosCollectionViewCell.PhotoGallery) {
+        publisher.removeSubscription(for: subscriber as! ImageLibrarySubscriber)
+    }
+    
+    public func addImagesWithTimer(){
+        fotoCollection.forEach({
+            userImages.append($0.photo!)
+            print($0)
+        })
+            publisher.addImagesWithTimer(time: 0.5, repeat: 10, userImages: userImages)
+    }
+
     
     
     
@@ -66,17 +70,18 @@ class PhotosViewController: UIViewController, UINavigationBarDelegate, UIGesture
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto4")),
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto1")),
         PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto2")),
+        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto4")),
+        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto1")),
+        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto2")),
+        PhotosCollectionViewCell.PhotoGallery(photo: UIImage(named: "foto2")),
        
-       
-   
-    
     ]
     
     override func viewDidLoad(){
         super.viewDidLoad()
         self.setupNavigationBar()
         self.setupCollectionFoto()
-        
+        addImagesWithTimer()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -108,7 +113,7 @@ class PhotosViewController: UIViewController, UINavigationBarDelegate, UIGesture
 extension PhotosViewController:UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.fotoCollection.count
+        self.userImages.count
     }
     
     
@@ -140,34 +145,10 @@ extension PhotosViewController:UICollectionViewDataSource, UICollectionViewDeleg
     
 extension PhotosViewController{
     func receive(images: [UIImage]) {
-        print("kjbkkjbhkbjkbkjbjkbnkjbnlkjbnjklbkjbn \(images)")
+        self.userImages = images
+        collectionView.reloadData()
+        print("777 \(images)")
     }
-    
-        public func subscribe(_ subscriber: PhotosCollectionViewCell.PhotoGallery){
-            guard subscription.contains(where: {_ in
-                receive(images: images)
-                return true
-            })else {
-                return
-            }
-            publisher.subscribe(subscription.append(subscriber) as! ImageLibrarySubscriber)
-            print("ADD")
-           // notifySubscribers()
-    
-        }
-    func removeSubscriber(_ subscriber: PhotosCollectionViewCell.PhotoGallery) {
-        subscription = subscription.filter { _ in _ = subscriber.photo?.images
-            return true }
-        print("DELETE")
-        
-    }
-    
-        private func notifySubscribers() {
-            subscription.forEach {_ in
-               receive(images: images)
-            }
-        }
-    
 
 }
 
