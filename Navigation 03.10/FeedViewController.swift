@@ -10,6 +10,8 @@ import StorageService
 
 class FeedViewController: UIViewController {
     
+    public var password = "777"
+    
     var post = Post(title: "Пост")
     public init(post: Post = Post(title: "Пост")) {
         self.post = post
@@ -20,15 +22,36 @@ class FeedViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private lazy var textHolder: UITextField = {
+        let text = UITextField()
+        text.placeholder = "PASSWORD"
+        text.textAlignment = .center
+        text.font = UIFont.boldSystemFont(ofSize: 20)
+        text.backgroundColor = .white
+        text.layer.cornerRadius = 15
+        text.translatesAutoresizingMaskIntoConstraints = false
+        return text
+    }()
+    
+    private lazy var checkGuessButton: UIButton = {
+        let button = CustomButton()
+        button.addTarget(self, action: #selector(checkPassword), for: .touchUpInside)
+        button.backgroundColor = .green
+        return button
+    }()
+    
+    private lazy var colorLabel:UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+        
+    }()
+    
     
     private lazy var button:UIButton = {
-        let button = UIButton()
-        button.setTitle("Кнопка", for: .normal)
-        button.setTitleColor(UIColor.systemBlue, for: .normal)
-        button.backgroundColor = .systemPink
-        button.layer.cornerRadius = 14
+        let button = CustomButton()
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
     }()
@@ -37,11 +60,53 @@ class FeedViewController: UIViewController {
     }
     private func setupButton(){
         self.view.addSubview(self.button)
+        self.view.addSubview(self.checkGuessButton)
+        self.view.addSubview(self.textHolder)
+        self.view.addSubview(self.colorLabel)
+        
         self.button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100).isActive = true
         self.button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive=true
         self.button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -20).isActive=true
         self.button.heightAnchor.constraint(equalToConstant: 50).isActive=true
+        
+        self.checkGuessButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive=true
+        self.checkGuessButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 100).isActive=true
+        self.checkGuessButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive=true
+        self.checkGuessButton.heightAnchor.constraint(equalToConstant: 40).isActive=true
+        
+        self.textHolder.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 250).isActive=true
+        self.textHolder.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 100).isActive=true
+        self.textHolder.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive=true
+        self.textHolder.heightAnchor.constraint(equalToConstant: 50).isActive=true
+        
+        self.colorLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 200).isActive=true
+        self.colorLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 100).isActive=true
+        self.colorLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive=true
+        self.colorLabel.heightAnchor.constraint(equalToConstant: 40).isActive=true
     }
+    
+    @objc private func checkPassword() -> Bool{
+//            if textHolder.text == self.password{
+//                print("OK")
+                let feedModel = FeedModel()
+        if textHolder.text == feedModel.secretWord{
+                    print("TRUE")
+            colorLabel.backgroundColor = .green
+            colorLabel.text = "TRUE"
+            colorLabel.textAlignment = .center
+            colorLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        return feedModel.check(secretWord: password)
+                }
+   //             return true
+  //          }
+        print("FAIL")
+        colorLabel.backgroundColor = .red
+        colorLabel.text = "FALSE"
+        colorLabel.textAlignment = .center
+        colorLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        return false
+        }
+
     
     @objc private func buttonAction(){
         let postViewController = PostViewController()
@@ -55,8 +120,6 @@ class FeedViewController: UIViewController {
         addFunc()
         setupButton()
         view.backgroundColor = .systemBlue
-
-        
     }
  
 

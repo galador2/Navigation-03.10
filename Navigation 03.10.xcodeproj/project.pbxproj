@@ -39,6 +39,8 @@
 		45A2976829BF42BD00AAFA7A /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976729BF42BD00AAFA7A /* LoginFactory.swift */; };
 		45A2976A29BF42D100AAFA7A /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2976929BF42D100AAFA7A /* MyLoginFactory.swift */; };
 		45A2977129C0563F00AAFA7A /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 45A2977029C0563F00AAFA7A /* iOSIntPackage */; };
+		45A2977329CD9C6000AAFA7A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2977229CD9C6000AAFA7A /* CustomButton.swift */; };
+		45A2977529D1915B00AAFA7A /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A2977429D1915B00AAFA7A /* FeedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +114,8 @@
 		45A2976529B7452000AAFA7A /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		45A2976729BF42BD00AAFA7A /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		45A2976929BF42D100AAFA7A /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
+		45A2977229CD9C6000AAFA7A /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		45A2977429D1915B00AAFA7A /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,8 @@
 				457163A128EB102400B5F086 /* AppDelegate.swift */,
 				457163A328EB102400B5F086 /* SceneDelegate.swift */,
 				457163A528EB102400B5F086 /* ViewController.swift */,
+				45A2977229CD9C6000AAFA7A /* CustomButton.swift */,
+				45A2977429D1915B00AAFA7A /* FeedModel.swift */,
 				457163B528EB1EE000B5F086 /* FeedViewController.swift */,
 				45A2976029B738EC00AAFA7A /* Checker */,
 				458331E429140807002CFDFD /* Profile */,
@@ -421,7 +427,9 @@
 				45A2976A29BF42D100AAFA7A /* MyLoginFactory.swift in Sources */,
 				453E1C5A2986F3B800282E44 /* PhotosCollectionViewCell.swift in Sources */,
 				45A2975B29AF9A5900AAFA7A /* UserService.swift in Sources */,
+				45A2977329CD9C6000AAFA7A /* CustomButton.swift in Sources */,
 				453E1C582986B53200282E44 /* PhotosViewController.swift in Sources */,
+				45A2977529D1915B00AAFA7A /* FeedModel.swift in Sources */,
 				458331E82934F314002CFDFD /* LogInViewController.swift in Sources */,
 				457163A428EB102400B5F086 /* SceneDelegate.swift in Sources */,
 			);
