@@ -33,10 +33,11 @@ class FeedViewController: UIViewController {
         return text
     }()
     
-    private lazy var checkGuessButton: UIButton = {
-        let button = CustomButton()
+    private lazy var checkGuessButton: CustomButton = {
+        let button = CustomButton(title: "AIR", backgroundColor: .green, titleColor: .white)
         button.addTarget(self, action: #selector(checkPassword), for: .touchUpInside)
-        button.backgroundColor = .green
+        button.layer.cornerRadius = 14
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         return button
     }()
     
@@ -49,8 +50,10 @@ class FeedViewController: UIViewController {
     }()
     
     
-    private lazy var button:UIButton = {
-        let button = CustomButton()
+    private lazy var button:CustomButton = {
+        let button = CustomButton(title: "ONAIR", backgroundColor: .systemPink, titleColor: .white)
+        button.layer.cornerRadius = 14
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
         

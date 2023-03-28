@@ -11,23 +11,22 @@ class CustomButton: UIButton{
     
     override init(frame: CGRect) {
         super .init(frame: frame)
-        customButton()
+   
+    }
+    init(title:String, backgroundColor:UIColor, titleColor:UIColor){
+        super.init(frame: .zero)
+        self.backgroundColor = backgroundColor
+        setTitle(title, for: .normal)
+        setTitleColor(titleColor, for: .normal)
+        translatesAutoresizingMaskIntoConstraints = false
+        layer.masksToBounds = false
+        clipsToBounds = true
     }
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        customButton()
-    }
-    
-     func customButton(){
-         setTitle("ONAIR", for: .normal)
-         setTitleColor(UIColor.white, for: .normal)
-         backgroundColor = .systemPink
-         layer.cornerRadius = 14
-         titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-         translatesAutoresizingMaskIntoConstraints = false
-    }
+        fatalError("init(coder:) has not been implemented")    }
 
   @objc private func buttonTapped(){
 
