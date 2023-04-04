@@ -10,9 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    
-    var firstTapBarController:UINavigationController!
-    var secondTapBarController:UINavigationController!
+    var appCoordinator: TapBar?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,18 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let tapBarController = UITabBarController()
         let loginVC = LogInViewController()
-        firstTapBarController = UINavigationController.init(rootViewController: FeedViewController())
-        secondTapBarController = UINavigationController.init(rootViewController: loginVC)
+        let firstTapBarController = UINavigationController.init(rootViewController: FeedViewController())
+        let secondTapBarController = UINavigationController.init(rootViewController: loginVC)
         let loginIspector = LoginInspector()
         loginVC.loginDelegate = loginIspector
-        tapBarController.viewControllers = [firstTapBarController,secondTapBarController]
-        let item1 = UITabBarItem(title: "Лента", image: UIImage(systemName: "doc"), tag: 0)
-        let item2 = UITabBarItem(title: "Профиль", image: UIImage(systemName: "paperplane"), tag: 1)
-        firstTapBarController.tabBarItem = item1
-        secondTapBarController.tabBarItem = item2
-        UITabBar.appearance().backgroundColor = .lightText
         let window = UIWindow(windowScene: windowScene)
         self.window = window
+        let appCoordinator = TapBar(firstTapBarController: firstTapBarController, secondTapBarController: secondTapBarController, tapBarController: tapBarController)
+        self.appCoordinator = appCoordinator
+        window.rootViewController = appCoordinator.start()
         window.rootViewController = tapBarController
         window.makeKeyAndVisible()
     }

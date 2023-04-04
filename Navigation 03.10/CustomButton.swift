@@ -9,6 +9,8 @@ import UIKit
 
 class CustomButton: UIButton{
     
+    var buttonTapped:(()->Void)?
+    
     override init(frame: CGRect) {
         super .init(frame: frame)
    
@@ -28,7 +30,7 @@ class CustomButton: UIButton{
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")    }
 
-  @objc private func buttonTapped(){
-
-    }
+  @objc private func tapped(){
+      buttonTapped?()
+               }
 }

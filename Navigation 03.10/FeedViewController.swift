@@ -10,6 +10,7 @@ import StorageService
 
 class FeedViewController: UIViewController {
     
+    
     public var password = "777"
     
     var post = Post(title: "Пост")
@@ -22,7 +23,7 @@ class FeedViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private lazy var textHolder: UITextField = {
+    public lazy var textHolder: UITextField = {
         let text = UITextField()
         text.placeholder = "PASSWORD"
         text.textAlignment = .center
@@ -89,8 +90,6 @@ class FeedViewController: UIViewController {
     }
     
     @objc private func checkPassword() -> Bool{
-//            if textHolder.text == self.password{
-//                print("OK")
                 let feedModel = FeedModel()
         if textHolder.text == feedModel.secretWord{
                     print("TRUE")
@@ -100,8 +99,6 @@ class FeedViewController: UIViewController {
             colorLabel.font = UIFont.boldSystemFont(ofSize: 25)
         return feedModel.check(secretWord: password)
                 }
-   //             return true
-  //          }
         print("FAIL")
         colorLabel.backgroundColor = .red
         colorLabel.text = "FALSE"

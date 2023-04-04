@@ -8,11 +8,11 @@
 import UIKit
 
 class FeedModel{
-    let feedViewController = FeedViewController()
+    var feedViewController:FeedViewController?
      var secretWord = "777"
     
      func check(secretWord:String)->Bool{
-        if secretWord == feedViewController.password{
+         if secretWord == feedViewController?.password{
             return true
         }
         return false
