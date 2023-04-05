@@ -8,7 +8,19 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    var user : User
+    
 
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.dataSource = self
@@ -32,7 +44,6 @@ class ProfileViewController: UIViewController {
     private var originalViewHightConstaint:CGFloat?
     private var originalTopConstant:CGFloat?
     private var originalLeadingConstant:CGFloat?
-
 
     
     
@@ -69,6 +80,7 @@ class ProfileViewController: UIViewController {
        avatar.layer.borderWidth = 3
        avatar.layer.borderColor = UIColor.white.cgColor
        avatar.clipsToBounds = true
+        avatar.alpha = 0.1
        return avatar
    }()
     
@@ -76,6 +88,8 @@ class ProfileViewController: UIViewController {
         var xButton = UIButton()
         xButton.setImage(UIImage(named: "X"), for: .normal)
         xButton.alpha = 0
+        xButton.contentHorizontalAlignment = .fill
+        xButton.contentVerticalAlignment = .fill
         xButton.addTarget(self, action: #selector(xButtonTouch), for: .touchUpInside)
         xButton.translatesAutoresizingMaskIntoConstraints = false
         return xButton
@@ -83,6 +97,14 @@ class ProfileViewController: UIViewController {
 
     
    private func setupConstraint(){
+#if DEBUG
+       
+       self.tableView.backgroundColor = .systemCyan
+    
+#else
+       self.tableView.backgroundColor = .systemGray4
+    
+#endif
         self.avatarViewWidthConstaint =
         avatarTap.widthAnchor.constraint(equalToConstant: 150)
         self.avatarViewHightConstaint =
@@ -130,7 +152,7 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         let tap = UITapGestureRecognizer(target:self, action: #selector(didTapAnimationButton))
         avatarTap.addGestureRecognizer(tap)
-        
+
     }
 
 
@@ -147,8 +169,11 @@ class ProfileViewController: UIViewController {
                            self.view.layoutIfNeeded()
                        }
             UIView.addKeyframe(withRelativeStartTime: 0.50, relativeDuration: 0.25) {
+                self.avatarTap.alpha = 1
                 self.xButton.alpha = 1
                 self.avatarTap.layer.cornerRadius = 0
+                self.blackView.isHidden = false
+                self.xButton.isHidden = false
             }
 
                    } completion: { _ in
@@ -157,14 +182,19 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func xButtonTouch(){
-        
-            self.blackView.isHidden = true
-            self.xButton.isHidden = true
-        self.avatarTap.layer.cornerRadius = 75
-        avatarTopConstant?.constant = originalTopConstant ?? 0
-        avatarLeadingConstant?.constant = originalLeadingConstant ?? 0
-        avatarViewHightConstaint?.constant = originalViewHightConstaint ?? 0
-        avatarViewWidthConstaint?.constant = originalViewWidthConstaint ?? 0
+            self.avatarTopConstant?.constant = self.originalTopConstant ?? 0
+            self.avatarLeadingConstant?.constant = self.originalLeadingConstant ?? 0
+            self.avatarViewHightConstaint?.constant = self.originalViewHightConstaint ?? 0
+            self.avatarViewWidthConstaint?.constant = self.originalViewWidthConstaint ?? 0
+            self.avatarTap.isHidden = true
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+            self.blackView.alpha = 0
+            self.xButton.alpha = 0
+            self.avatarTap.layer.cornerRadius = 75
+            self.avatarTap.alpha = 0
+            self.view.layoutSubviews()
+        }
+            
     }
 }
 
@@ -173,12 +203,11 @@ extension ProfileViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
-            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView else { return nil }
-
-            let viewModel = ProfileHeaderView()
-            
+            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView  else { return nil }
+            headerView.profileVC = self
+            headerView.setup(user: user)
             return headerView
-            
+
         }
         
         return nil

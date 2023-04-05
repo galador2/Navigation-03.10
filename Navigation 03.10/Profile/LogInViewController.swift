@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController{
     
+    var loginDelegate:LoginViewControllerDelegate?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +31,7 @@ class LogInViewController: UIViewController{
         
     }()
     
-     private lazy var login:UITextField = {
+     public lazy var login:UITextField = {
         let login = UITextField()
         login.borderStyle = .roundedRect
         login.placeholder = "Email or phone"
@@ -63,7 +65,7 @@ class LogInViewController: UIViewController{
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.setTitle("Log in", for: .normal)
-        button.addTarget(self, action: #selector(setupButtonLogIn), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.setupCheck), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
@@ -80,6 +82,16 @@ class LogInViewController: UIViewController{
         return pictureVK
         
     }()
+    
+    private lazy var mistakeEnterLogin:UILabel = {
+        var label = UILabel()
+        label.text = "Wrong login"
+        label.textColor = .red
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private var log: String?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +112,7 @@ class LogInViewController: UIViewController{
         setupLayout()
         viewConstrain()
         setupGestures()
+        
     }
     
     private func setupLayout(){
@@ -109,6 +122,7 @@ class LogInViewController: UIViewController{
         self.stackView.addArrangedSubview(password)
         self.view.addSubview(button)
         self.view.addSubview(pictureVK)
+        self.view.addSubview(mistakeEnterLogin)
     }
     
     private func setupGestures(){
@@ -164,7 +178,10 @@ class LogInViewController: UIViewController{
             self.button.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
             self.button.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
             self.button.heightAnchor.constraint(equalToConstant: 50),
-            self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
+            self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
+            
+            self.mistakeEnterLogin.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            self.mistakeEnterLogin.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor)
 
         ])
     }
@@ -173,11 +190,29 @@ class LogInViewController: UIViewController{
         login.text = ""
         password.text = ""
     }
+
     
-    @objc private func setupButtonLogIn(){
-        let profileViewController = ProfileViewController ()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+    @objc private func setupCheck(){
+
+        let login = self.login.text ?? ""
+        let password = self.password.text ?? ""
+        print("login \(login)  pswd \(password)")
+        //let checkLogin = loginDelegate?.check(login: login, password: password) ?? false
+        let checkLogin = MyLoginFactory().makeLoginInspector().check(login: login, password: password)
+        
+        if checkLogin{
+            print(true)
+            let user = User(login: "1", fullName: "Kirill Kirill", avatar: UIImage(named: "foto3"), status: "busy")
+            let profileViewController = ProfileViewController (user: user)
+            navigationController?.setViewControllers([profileViewController], animated: true)
+        } else {
+            let alert = UIAlertController(title: "Unknown", message: "Please, enter correct user login", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            self.present(alert, animated: true)
+        }
+
     }
+
     
     @objc private func keyboard(_ notification: Notification){
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
@@ -190,7 +225,7 @@ class LogInViewController: UIViewController{
             let keyboardOriginY = self.view.frame.height - keyboardHeight
 
             let yOffset = keyboardOriginY < loginButtonBottomPointY
-           
+
             ? loginButtonBottomPointY - keyboardOriginY - 270
             : 0
 
