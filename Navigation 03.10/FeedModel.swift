@@ -11,7 +11,7 @@ class FeedModel{
     var feedViewController:FeedViewController?
      var secretWord = "777"
     
-     func check(secretWord:String)->Bool{
+    func check(secretWord:String)->Bool{
          if secretWord == feedViewController?.password{
             return true
         }

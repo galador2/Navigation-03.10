@@ -23,6 +23,7 @@ class CustomButton: UIButton{
         translatesAutoresizingMaskIntoConstraints = false
         layer.masksToBounds = false
         clipsToBounds = true
+        addTarget(self, action: #selector(tapped), for: .touchUpInside)
     }
     
     

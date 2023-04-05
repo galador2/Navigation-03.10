@@ -36,11 +36,30 @@ class FeedViewController: UIViewController {
     
     private lazy var checkGuessButton: CustomButton = {
         let button = CustomButton(title: "AIR", backgroundColor: .green, titleColor: .white)
-        button.addTarget(self, action: #selector(checkPassword), for: .touchUpInside)
         button.layer.cornerRadius = 14
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        return button
-    }()
+        button.buttonTapped = {[weak self] in
+                let feedModel = FeedModel()
+                if self?.textHolder.text == feedModel.secretWord{
+                    print("TRUE")
+                    self?.colorLabel.backgroundColor = .green
+                    self?.colorLabel.text = "TRUE"
+                    self?.colorLabel.textAlignment = .center
+                    self?.colorLabel.font = UIFont.boldSystemFont(ofSize: 25)
+                    return
+                }
+                print("FAIL")
+                self?.colorLabel.backgroundColor = .red
+                self?.colorLabel.text = "FALSE"
+                self?.colorLabel.textAlignment = .center
+                self?.colorLabel.font = UIFont.boldSystemFont(ofSize: 25)
+                return 
+            
+        }
+
+            return button
+        
+        }()
     
     private lazy var colorLabel:UILabel = {
         let label = UILabel()
@@ -55,7 +74,9 @@ class FeedViewController: UIViewController {
         let button = CustomButton(title: "ONAIR", backgroundColor: .systemPink, titleColor: .white)
         button.layer.cornerRadius = 14
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.buttonTapped = {[weak self] in
+            self?.navigationController?.pushViewController(PostViewController(), animated: true)
+        }
         return button
         
     }()
@@ -88,32 +109,7 @@ class FeedViewController: UIViewController {
         self.colorLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive=true
         self.colorLabel.heightAnchor.constraint(equalToConstant: 40).isActive=true
     }
-    
-    @objc private func checkPassword() -> Bool{
-                let feedModel = FeedModel()
-        if textHolder.text == feedModel.secretWord{
-                    print("TRUE")
-            colorLabel.backgroundColor = .green
-            colorLabel.text = "TRUE"
-            colorLabel.textAlignment = .center
-            colorLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        return feedModel.check(secretWord: password)
-                }
-        print("FAIL")
-        colorLabel.backgroundColor = .red
-        colorLabel.text = "FALSE"
-        colorLabel.textAlignment = .center
-        colorLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        return false
-        }
 
-    
-    @objc private func buttonAction(){
-        let postViewController = PostViewController()
-        //postViewController.titleName = post.title
-        self.navigationController?.pushViewController(postViewController, animated: true)
-        
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
